@@ -15,11 +15,23 @@ const setToggleLogin = () => (toggleLogin.value = !toggleLogin.value);
   >
     Connexion
   </button>
-  <CandidateModalLogin
-    v-if="toggleLogin"
-    @update:toggleLogin="(val) => (toggleLogin = val)"
-    :toggleLogin="toggleLogin"
-  />
+  <transition name="login-modal">
+    <CandidateModalLogin
+      v-if="toggleLogin"
+      @update:toggleLogin="(val) => (toggleLogin = val)"
+      :toggleLogin="toggleLogin"
+    />
+  </transition>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.login-modal-enter-active,
+.login-modal-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.login-modal-enter-from,
+.login-modal-leave-to {
+  opacity: 0;
+}
+</style>
