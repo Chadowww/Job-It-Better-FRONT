@@ -104,9 +104,9 @@ const setField = (e: Event) => {
           OU
         </p>
       </div>
-      <div>
-        <form method="post" class="grid grid-cols-2 gap-2 font-bold">
-          <div class="flex flex-col col-span-2">
+      <div class="w-10/12">
+        <form method="post" class="m-auto font-bold">
+          <div class="flex flex-col">
             <label for="email">Adresse mail</label>
             <input
               @input="setField"
@@ -124,48 +124,6 @@ const setField = (e: Event) => {
               name="password"
               v-model="user.password"
               placeholder="Entre ton mot de passe"
-            />
-          </div>
-          <div class="flex flex-col">
-            <label for="repeatPassword">Vérification mot de passe</label>
-            <input
-              @input="setField"
-              type="password"
-              name="repeatPassword"
-              v-model="user.repeatPassword"
-              placeholder="Entre à nouveau ton mot de passe"
-            />
-          </div>
-          <input type="hidden" v-model="user.role" value="ROLE_CANDIDATE" />
-        </form>
-        <form method="post" class="grid grid-cols-2 gap-2 font-bold">
-          <div class="flex flex-col">
-            <label for="firstname">Nom</label>
-            <input
-              @input="setField"
-              type="text"
-              name="firstname"
-              v-model="candidate.firstname"
-              placeholder="Entre ton prénom"
-            />
-          </div>
-          <div class="flex flex-col">
-            <label for="lastname">Prénom</label>
-            <input
-              @input="setField"
-              type="text"
-              name="lastname"
-              v-model="candidate.lastname"
-              placeholder="Entre ton nom"
-            />
-          </div>
-          <div>
-            <input
-              @input="setField"
-              type="hidden"
-              name="user_id"
-              v-model="candidate.user_id"
-              value=""
             />
           </div>
         </form>
