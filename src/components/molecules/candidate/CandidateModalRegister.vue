@@ -48,7 +48,7 @@ const setField = (e: Event) => {
   >
     <div
       @click.stop
-      class="h-2/3 w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
+      class="w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-8"
     >
       <h2 class="font-bold uppercase m-8 text-center text-black text-4xl">
         S' <span class="text-green-900">inscrire</span>
@@ -187,7 +187,7 @@ const setField = (e: Event) => {
           </a>
         </div>
       </div>
-      <div class="w-full flex justify-center items-center">
+      <div class="w-full flex justify-center items-center pt-8">
         <button
           class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
         >

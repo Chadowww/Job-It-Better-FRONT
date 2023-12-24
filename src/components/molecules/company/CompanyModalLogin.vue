@@ -23,7 +23,7 @@ const { email, password } = data;
     >
       <div
         @click.stop
-        class="min-h-1/3 w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
+        class="w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
       >
         <h2 class="font-bold uppercase m-8 text-center text-black text-4xl">
           Se <span class="text-green-900">connecter</span>
