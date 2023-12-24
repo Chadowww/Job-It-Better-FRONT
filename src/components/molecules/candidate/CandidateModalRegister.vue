@@ -2,6 +2,8 @@
 import { defineProps, defineEmits } from "vue";
 import { UserFormType } from "@/types/UserFormType";
 import { CandidateFormType } from "@/types/CandidateFormType";
+import axios from "axios";
+import events from "events";
 
 const props = defineProps({
   toggleRegister: Boolean,
@@ -13,31 +15,55 @@ const user: UserFormType = {
   email: "",
   password: "",
   repeatPassword: "",
-  role: "ROLE_USER",
+  roles: 3,
 };
 const candidate: CandidateFormType = {
   firstname: "",
   lastname: "",
   user_id: null,
 };
-
-const setField = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  const key: string = target.name;
-  const userKey = key as keyof UserFormType;
-  const candidateKey = key as keyof CandidateFormType;
-
-  if (userKey in user) {
-    user[userKey] = target.value;
-  }
-  if (candidateKey in candidate) {
-    if (candidateKey === "user_id") {
-      candidate[candidateKey] = target.value ? parseInt(target.value) : null;
-    } else {
-      candidate[candidateKey] = target.value;
+const userRegister = async () => {
+  try {
+    const response = await axios.post(
+      "https://127.0.0.1:8000/user/create",
+      user,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 201) {
+      candidate.user_id = response.data.user_id;
     }
+  } catch (error: any) {
+    console.log(error);
   }
-  console.log(user, candidate);
+};
+
+const candidateRegister = async () => {
+  try {
+    const response = await axios.post(
+      "https://127.0.0.1:8000/candidate/create",
+      candidate,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 201) {
+      emit("update:toggleRegister", false);
+    }
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+const register = async (e: events) => {
+  e.preventDefault();
+  await userRegister();
+  await candidateRegister();
 };
 </script>
 
@@ -111,7 +137,6 @@ const setField = (e: Event) => {
           <div class="flex flex-col col-span-2">
             <label for="email">Adresse mail</label>
             <input
-              @input="setField"
               type="email"
               name="email"
               v-model="user.email"
@@ -121,7 +146,6 @@ const setField = (e: Event) => {
           <div class="flex flex-col">
             <label for="password">Mot de passe</label>
             <input
-              @input="setField"
               type="password"
               name="password"
               v-model="user.password"
@@ -133,20 +157,17 @@ const setField = (e: Event) => {
               >Vérification mot de passe</label
             >
             <input
-              @input="setField"
               type="password"
               name="repeatPassword"
               v-model="user.repeatPassword"
               placeholder="Entre à nouveau ton mot de passe"
             />
           </div>
-          <input type="hidden" v-model="user.role" value="ROLE_CANDIDATE" />
         </form>
         <form method="post" class="grid grid-cols-2 gap-2 font-bold">
           <div class="flex flex-col">
             <label for="firstname">Nom</label>
             <input
-              @input="setField"
               type="text"
               name="firstname"
               v-model="candidate.firstname"
@@ -156,7 +177,6 @@ const setField = (e: Event) => {
           <div class="flex flex-col">
             <label for="lastname">Prénom</label>
             <input
-              @input="setField"
               type="text"
               name="lastname"
               v-model="candidate.lastname"
@@ -165,7 +185,6 @@ const setField = (e: Event) => {
           </div>
           <div>
             <input
-              @input="setField"
               type="hidden"
               name="user_id"
               v-model="candidate.user_id"
@@ -197,6 +216,7 @@ const setField = (e: Event) => {
       </div>
       <div class="w-full flex justify-center items-center pt-8">
         <button
+          @click="register"
           class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
         >
           S'inscrire
