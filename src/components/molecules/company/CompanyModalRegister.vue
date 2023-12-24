@@ -53,7 +53,7 @@ const setField = (e: Event) => {
     >
       <div
         @click.stop
-        class="w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
+        class="w-10/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
       >
         <h2 class="font-bold uppercase m-8 text-center text-black text-4xl">
           Inscription <span class="text-green-900">entreprise</span>
@@ -164,8 +164,12 @@ const setField = (e: Event) => {
               <div class="w-full flex justify-between">
                 <div class="flex">
                   <input type="checkbox" required />
-                  <p class="text-green-900">
-                    Accepter les conditions générales d'utilisation
+                  <p class="font-medium">
+                    Accepter les conditions
+                    <span class="text-[#14532D] font-bold"
+                      >générales d'utilisation</span
+                    >
+                    ?
                   </p>
                 </div>
                 <a
