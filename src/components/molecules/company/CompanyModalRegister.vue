@@ -49,16 +49,18 @@ const setField = (e: Event) => {
   <teleport to="body">
     <div
       @click="emit('update:toggleRegister', false)"
-      class="absolute top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-8"
+      class="absolute top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
     >
       <div
         @click.stop
-        class="w-10/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
+        class="w-11/12 md:w-10/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
       >
-        <h2 class="font-bold uppercase m-8 text-center text-black text-4xl">
+        <h2
+          class="font-bold uppercase m-4 md:m-8 text-center text-black text-xl md:text-4xl"
+        >
           Inscription <span class="text-green-900">entreprise</span>
         </h2>
-        <div>
+        <div class="w-11/12">
           <form method="post" class="grid grid-cols-2 gap-2 font-bold">
             <div class="flex flex-col col-span-2">
               <label for="email">Adresse mail</label>
@@ -80,8 +82,10 @@ const setField = (e: Event) => {
                 placeholder="Entrez le mot de passe"
               />
             </div>
-            <div class="flex flex-col">
-              <label for="repeatPassword">Vérification mot de passe</label>
+            <div class="flex flex-col overflow-hidden">
+              <label for="repeatPassword" class="text-nowrap">
+                Vérification mot de passe
+              </label>
               <input
                 @input="setField"
                 type="password"
@@ -160,11 +164,13 @@ const setField = (e: Event) => {
               v-model="company.user_id"
               value=""
             />
-            <div class="col-span-2 p-8">
-              <div class="w-full flex justify-between">
-                <div class="flex">
+            <div class="col-span-2 py-8 px2 md:p-8">
+              <div
+                class="w-full flex flex-col items-center justify-center md:flex-row md:justify-between text-sm md:text-md"
+              >
+                <div class="flex w-10/12 md:w-auto">
                   <input type="checkbox" required />
-                  <p class="font-medium">
+                  <p class="font-medium text-center">
                     Accepter les conditions
                     <span class="text-[#14532D] font-bold"
                       >générales d'utilisation</span
@@ -208,5 +214,15 @@ input {
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
+}
+
+@media (max-width: 400px) {
+  label {
+    font-size: 1rem;
+  }
+  input {
+    padding: 2px;
+    margin: 2px;
+  }
 }
 </style>

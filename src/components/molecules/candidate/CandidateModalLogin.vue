@@ -48,9 +48,11 @@ const setField = (e: Event) => {
   >
     <div
       @click.stop
-      class="w-8/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-8"
+      class="w-11/12 md:w-8/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
     >
-      <h2 class="font-bold uppercase m-8 text-center text-black text-4xl">
+      <h2
+        class="font-bold uppercase m-4 md:m-8 text-center text-black text-xl md:text-4xl"
+      >
         Se <span class="text-green-900">connecter</span>
       </h2>
       <!-- Social login buttons -->
@@ -104,7 +106,7 @@ const setField = (e: Event) => {
           OU
         </p>
       </div>
-      <div class="w-10/12">
+      <div class="w-11/12 md:w-10/12">
         <form method="post" class="m-auto font-bold">
           <div class="flex flex-col">
             <label for="email">Adresse mail</label>
@@ -126,7 +128,7 @@ const setField = (e: Event) => {
               placeholder="Entre ton mot de passe"
             />
           </div>
-          <div class="w-full flex justify-between">
+          <div class="w-full flex justify-between text-sm md:text-md my-2">
             <div class="flex">
               <input type="checkbox" />
               <p class="text-green-900">Se souvenir de moi?</p>
@@ -167,5 +169,15 @@ input {
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
+}
+
+@media (max-width: 400px) {
+  label {
+    font-size: 1rem;
+  }
+  input {
+    padding: 2px;
+    margin: 2px;
+  }
 }
 </style>

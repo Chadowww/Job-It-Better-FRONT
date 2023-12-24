@@ -48,9 +48,11 @@ const setField = (e: Event) => {
   >
     <div
       @click.stop
-      class="w-10/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-8"
+      class="w-11/12 md:w-10/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
     >
-      <h2 class="font-bold uppercase m-8 text-center text-black text-4xl">
+      <h2
+        class="font-bold uppercase m-4 md:m-8 text-center text-black text-4xl"
+      >
         S' <span class="text-green-900">inscrire</span>
       </h2>
       <!-- Social Register buttons -->
@@ -126,8 +128,10 @@ const setField = (e: Event) => {
               placeholder="Entre ton mot de passe"
             />
           </div>
-          <div class="flex flex-col">
-            <label for="repeatPassword">Vérification mot de passe</label>
+          <div class="flex flex-col overflow-hidden">
+            <label for="repeatPassword" class="text-nowrap"
+              >Vérification mot de passe</label
+            >
             <input
               @input="setField"
               type="password"
@@ -213,5 +217,15 @@ input {
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
+}
+
+@media (max-width: 400px) {
+  label {
+    font-size: 1rem;
+  }
+  input {
+    padding: 2px;
+    margin: 2px;
+  }
 }
 </style>
