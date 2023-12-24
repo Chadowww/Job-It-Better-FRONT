@@ -2,6 +2,8 @@
 import { defineProps, defineEmits } from "vue";
 import { UserFormType } from "@/types/UserFormType";
 import { CompanyFormType } from "@/types/CompanyFormType";
+import axios from "axios";
+import * as events from "events";
 
 const props = defineProps({
   toggleRegister: Boolean,
@@ -13,7 +15,7 @@ const user: UserFormType = {
   email: "",
   password: "",
   repeatPassword: "",
-  role: "ROLE_USER",
+  roles: 5,
 };
 const company: CompanyFormType = {
   name: "",
@@ -25,23 +27,48 @@ const company: CompanyFormType = {
   user_id: null,
 };
 
-const setField = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  const key: string = target.name;
-  const userKey = key as keyof UserFormType;
-  const companyKey = key as keyof CompanyFormType;
-
-  if (userKey in user) {
-    user[userKey] = target.value;
-  }
-  if (companyKey in company) {
-    if (companyKey === "user_id") {
-      company[companyKey] = target.value ? parseInt(target.value) : null;
-    } else {
-      company[companyKey] = target.value;
+const userRegister = async () => {
+  try {
+    const response = await axios.post(
+      "https://127.0.0.1:8000/user/create",
+      user,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 201) {
+      company.user_id = response.data.user_id;
     }
+  } catch (error: any) {
+    console.log(error);
   }
-  console.log(user, company);
+};
+
+const companyRegister = async () => {
+  try {
+    const response = await axios.post(
+      "https://127.0.0.1:8000/company/create",
+      company,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 201) {
+      emit("update:toggleRegister", false);
+    }
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
+const register = async (e: events) => {
+  e.preventDefault();
+  await userRegister();
+  await companyRegister();
 };
 </script>
 
@@ -61,11 +88,10 @@ const setField = (e: Event) => {
           Inscription <span class="text-green-900">entreprise</span>
         </h2>
         <div class="w-11/12">
-          <form method="post" class="grid grid-cols-2 gap-2 font-bold">
+          <form class="grid grid-cols-2 gap-2 font-bold">
             <div class="flex flex-col col-span-2">
               <label for="email">Adresse mail</label>
               <input
-                @input="setField"
                 type="email"
                 name="email"
                 v-model="user.email"
@@ -75,7 +101,6 @@ const setField = (e: Event) => {
             <div class="flex flex-col">
               <label for="password">Mot de passe</label>
               <input
-                @input="setField"
                 type="password"
                 name="password"
                 v-model="user.password"
@@ -87,20 +112,17 @@ const setField = (e: Event) => {
                 Vérification mot de passe
               </label>
               <input
-                @input="setField"
                 type="password"
                 name="repeatPassword"
                 v-model="user.repeatPassword"
                 placeholder="Entrez à nouveau le mot de passe"
               />
             </div>
-            <input type="hidden" v-model="user.role" value="ROLE_company" />
           </form>
-          <form method="post" class="grid grid-cols-2 gap-2 font-bold">
+          <form class="grid grid-cols-2 gap-2 font-bold">
             <div class="flex flex-col">
               <label for="name">Nom</label>
               <input
-                @input="setField"
                 type="text"
                 name="name"
                 v-model="company.name"
@@ -110,7 +132,6 @@ const setField = (e: Event) => {
             <div class="flex flex-col">
               <label for="phone">Téléphone</label>
               <input
-                @input="setField"
                 type="text"
                 name="phone"
                 v-model="company.phone"
@@ -120,7 +141,6 @@ const setField = (e: Event) => {
             <div class="flex flex-col">
               <label for="phone">adresse</label>
               <input
-                @input="setField"
                 type="text"
                 name="address"
                 v-model="company.address"
@@ -130,7 +150,6 @@ const setField = (e: Event) => {
             <div class="flex flex-col">
               <label for="phone">Ville</label>
               <input
-                @input="setField"
                 type="text"
                 name="city"
                 v-model="company.city"
@@ -140,7 +159,6 @@ const setField = (e: Event) => {
             <div class="flex flex-col">
               <label for="phone">Pays</label>
               <input
-                @input="setField"
                 type="text"
                 name="country"
                 v-model="company.country"
@@ -150,7 +168,6 @@ const setField = (e: Event) => {
             <div class="flex flex-col">
               <label for="phone">Siret</label>
               <input
-                @input="setField"
                 type="text"
                 name="siret"
                 v-model="company.siret"
@@ -158,7 +175,6 @@ const setField = (e: Event) => {
               />
             </div>
             <input
-              @input="setField"
               type="hidden"
               name="user_id"
               v-model="company.user_id"
@@ -190,6 +206,7 @@ const setField = (e: Event) => {
               </div>
               <div class="w-full flex justify-center items-center pt-8">
                 <button
+                  @click="register"
                   class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
                 >
                   S'inscrire
