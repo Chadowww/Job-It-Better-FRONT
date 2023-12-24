@@ -48,7 +48,7 @@ const setField = (e: Event) => {
   >
     <div
       @click.stop
-      class="w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-8"
+      class="w-8/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-8"
     >
       <h2 class="font-bold uppercase m-8 text-center text-black text-4xl">
         Se <span class="text-green-900">connecter</span>
@@ -126,29 +126,31 @@ const setField = (e: Event) => {
               placeholder="Entre ton mot de passe"
             />
           </div>
+          <div class="w-full flex justify-between">
+            <div class="flex">
+              <input type="checkbox" />
+              <p class="text-green-900">Se souvenir de moi?</p>
+            </div>
+            <a href="" class="text-green-900 hover:underline"
+              >Mot de passe oublié?</a
+            >
+          </div>
         </form>
-        <a
-          href=""
-          class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out"
-        >
-          Pas encore inscrit ?
-        </a>
-      </div>
-      <div class="w-full flex justify-center items-center p-8">
-        <button
-          class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
-        >
-          Se connectecter
-        </button>
-      </div>
-      <div class="w-9/12 flex justify-between">
-        <div class="flex">
-          <input type="checkbox" />
-          <p class="text-green-900">Se souvenir de moi?</p>
+        <div class="w-full flex justify-center items-center p-8">
+          <button
+            class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
+          >
+            Se connectecter
+          </button>
         </div>
-        <a href="" class="text-green-900 hover:underline"
-          >Mot de passe oublié?</a
-        >
+        <div class="w-full flex justify-end">
+          <a
+            href=""
+            class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out"
+          >
+            Pas encore inscrit ?
+          </a>
+        </div>
       </div>
     </div>
   </div>
