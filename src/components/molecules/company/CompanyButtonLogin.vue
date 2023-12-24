@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import CompanyModalLogin from "@/components/molecules/CompanyModalLogin.vue";
+import CompanyModalLogin from "@/components/molecules/company/CompanyModalLogin.vue";
 
 const toggleLogin = ref(false);
 const setToggleLogin = () => (toggleLogin.value = !toggleLogin.value);

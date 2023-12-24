@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import CompanyModalRegister from "@/components/molecules/CompanyModalRegister.vue";
+import CompanyModalRegister from "@/components/molecules/company/CompanyModalRegister.vue";
+
 const toggleRegister = ref(false);
 const setToggleRegister = () => (toggleRegister.value = !toggleRegister.value);
 </script>
