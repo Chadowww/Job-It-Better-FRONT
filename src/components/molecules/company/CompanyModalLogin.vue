@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from "vue";
+import { defineProps, defineEmits } from "vue";
+import axios from "axios";
 
 const props = defineProps({
   toggleLogin: Boolean,
@@ -8,11 +9,33 @@ const props = defineProps({
 const emit = defineEmits(["update:toggleLogin", "update:toggleRegister"]);
 
 const data = {
-  email: ref(""),
-  password: ref(""),
+  email: "",
+  password: "",
 };
 
-const { email, password } = data;
+const userLogin = async () => {
+  try {
+    const response = await axios.post("https://127.0.0.1:8000/login", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data.token);
+      setTimeout(() => {
+        localStorage.removeItem("token");
+      }, 3600000);
+      emit("update:toggleLogin", false);
+      location.reload();
+    }
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+const login = () => {
+  userLogin();
+};
 </script>
 
 <template>
@@ -37,7 +60,7 @@ const { email, password } = data;
               <input
                 type="email"
                 name="email"
-                v-model="email"
+                v-model="data.email"
                 placeholder="exemple.email@mail.fr"
               />
             </div>
@@ -46,7 +69,7 @@ const { email, password } = data;
               <input
                 type="password"
                 name="password"
-                v-model="password"
+                v-model="data.password"
                 placeholder="Entre ton mot de passe"
               />
             </div>
@@ -62,6 +85,7 @@ const { email, password } = data;
           </form>
           <div class="w-full flex justify-center items-center p-2 md:p-8">
             <button
+              @click="login"
               class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
             >
               Se connectecter
