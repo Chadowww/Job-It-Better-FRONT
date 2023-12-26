@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'jost';
+  src: url('assets/fonts/Jost/static/Jost-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'jost';
+  src: url('assets/fonts/Jost/static/Jost-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+$font-family: jost, sans-serif;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font-family;
+}
+
+body {
+  background-color: #f5f5f5;
+}
