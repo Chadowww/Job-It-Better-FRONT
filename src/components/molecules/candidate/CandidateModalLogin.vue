@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
-import { UserFormType } from "@/types/UserFormType";
-import { CandidateFormType } from "@/types/CandidateFormType";
+import { defineProps, defineEmits, ref } from "vue";
+import axios from "axios";
 
 const props = defineProps({
   toggleLogin: Boolean,
@@ -9,35 +8,33 @@ const props = defineProps({
 
 const emit = defineEmits(["update:toggleLogin", "update:toggleRegister"]);
 
-const user: UserFormType = {
+const data = {
   email: "",
   password: "",
-  repeatPassword: "",
-  role: "ROLE_USER",
-};
-const candidate: CandidateFormType = {
-  firstname: "",
-  lastname: "",
-  user_id: null,
 };
 
-const setField = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  const key: string = target.name;
-  const userKey = key as keyof UserFormType;
-  const candidateKey = key as keyof CandidateFormType;
-
-  if (userKey in user) {
-    user[userKey] = target.value;
-  }
-  if (candidateKey in candidate) {
-    if (candidateKey === "user_id") {
-      candidate[candidateKey] = target.value ? parseInt(target.value) : null;
-    } else {
-      candidate[candidateKey] = target.value;
+const userLogin = async () => {
+  try {
+    const response = await axios.post("https://127.0.0.1:8000/login", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data.token);
+      setTimeout(() => {
+        localStorage.removeItem("token");
+      }, 3600000);
+      emit("update:toggleLogin", false);
+      location.reload();
     }
+  } catch (error: any) {
+    console.log(error);
   }
-  console.log(user, candidate);
+};
+const login = () => {
+  userLogin();
 };
 </script>
 
@@ -111,20 +108,18 @@ const setField = (e: Event) => {
           <div class="flex flex-col">
             <label for="email">Adresse mail</label>
             <input
-              @input="setField"
               type="email"
               name="email"
-              v-model="user.email"
+              v-model="data.email"
               placeholder="exemple.email@mail.fr"
             />
           </div>
           <div class="flex flex-col">
             <label for="password">Mot de passe</label>
             <input
-              @input="setField"
               type="password"
               name="password"
-              v-model="user.password"
+              v-model="data.password"
               placeholder="Entre ton mot de passe"
             />
           </div>
@@ -140,6 +135,7 @@ const setField = (e: Event) => {
         </form>
         <div class="w-full flex justify-center items-center p-8">
           <button
+            @click="login"
             class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
           >
             Se connectecter
