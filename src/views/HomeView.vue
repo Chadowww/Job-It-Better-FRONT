@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import NavbarComponent from "@/components/organisms/NavbarComponent.vue";
-console.log("hello");
+import HeroComponent from "@/components/organisms/HeroComponent.vue";
 </script>
 
 <template>
   <main class="min-h-screen flex flex-col justify-between">
     <header>
       <navbar-component />
+      <HeroComponent />
     </header>
     <section>
       <div>
