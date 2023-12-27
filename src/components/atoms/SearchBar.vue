@@ -3,7 +3,7 @@
 <template>
   <form
     action=""
-    class="search-bar flex justify-around items-center bg-[#f5f5f5] w-full rounded-2xl"
+    class="search-bar flex justify-around items-center bg-[#f5f5f5] w-full md:rounded-2xl"
   >
     <div class="flex flex-col justify-center items-center w-5/12">
       <div>
@@ -18,7 +18,7 @@
         />
       </div>
     </div>
-    <div class="w-[2px] h-10 lg:h-20 bg-gray-500 my-4"></div>
+    <div class="w-[1px] h-10 lg:h-20 bg-gray-500 my-1"></div>
     <div class="flex flex-col justify-center items-center w-5/12">
       <div>
         <label for="what" class="text-xs lg:text-2xl font-bold py-2">Où?</label>
