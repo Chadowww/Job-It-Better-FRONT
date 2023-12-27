@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
+import { useStore } from "vuex";
 import logo from "@/assets/images/logo-allonge.png";
 import { Dropdown, Ripple, initTE } from "tw-elements";
 import CandidateButtonLogin from "@/components/molecules/candidate/CandidateButtonLogin.vue";
@@ -8,29 +9,50 @@ import CompanyButtonLogin from "@/components/molecules/company/CompanyButtonLogi
 import CompanyButtonRegister from "@/components/molecules/company/CompanyButtonRegister.vue";
 import LogoutButton from "@/components/molecules/LogoutButton.vue";
 import SearchBar from "@/components/atoms/SearchBar.vue";
+
+const store = useStore();
+const isSearchBarVisible = computed(() => store.state.isSearchBarVisible);
+
+const shouldHide = ref(false);
+
 onMounted(() => {
   initTE({ Dropdown, Ripple });
+  setShouldHide();
+  addEventListener("resize", setShouldHide);
+  addEventListener("scroll", setShouldHide);
 });
 
 const token = ref(localStorage.getItem("token"));
 const isLoggedIn = computed(() => !!token.value);
-console.log(isLoggedIn.value);
+
+const setShouldHide = () => {
+  const tailwindMdBreakpoint = 1024;
+  shouldHide.value =
+    isSearchBarVisible.value && window.innerWidth < tailwindMdBreakpoint;
+};
 </script>
 
 <template>
   <nav
-    class="hidden md:flex justify-around items-center w-full shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
+    class="hidden fixed z-[100] md:flex justify-around items-center w-full bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
   >
-    <div class="w-2/12">
+    <div class="w-2/12 my-4" v-if="!shouldHide">
       <a href="/">
         <img :src="logo" alt="Logo JobItBetter" />
       </a>
     </div>
-    <SearchBar />
-    <div class="flex justify-between items-center w-7/12 lg:w-4/12">
+    <div
+      class="w-5/12 lg:w-4/12 xl:w-4/12 2xl:w-5/12"
+      v-if="isSearchBarVisible"
+    >
+      <SearchBar />
+    </div>
+    <div
+      class="flex justify-between items-center w-6/12 lg:w-5/12 xl:w-5/12 2xl:w-4/12"
+    >
       <div class="relative" data-te-dropdown-ref v-if="!isLoggedIn">
         <button
-          class="flex items-center whitespace-nowrap rounded px-6 pb-2 pt-2.5 text-lg leading-normal text-black font-normal transition duration-150 ease-in-out motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)]"
+          class="flex items-center whitespace-nowrap rounded px-2 lg:pr-3 pb-2 pt-2.5 text-sm lg:text-lg leading-normal text-black font-normal transition duration-150 ease-in-out motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)]"
           type="button"
           id="dropdownMenuButton1"
           data-te-dropdown-toggle-ref
@@ -65,7 +87,7 @@ console.log(isLoggedIn.value);
       </div>
       <div class="relative" data-te-dropdown-ref>
         <button
-          class="flex items-center whitespace-nowrap rounded px-6 pb-2 pt-2.5 text-lg leading-normal text-black font-normal transition duration-150 ease-in-out motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)]"
+          class="flex items-center whitespace-nowrap rounded px-2 lg:pr-3 pb-2 pt-2.5 text-sm lg:text-lg leading-normal text-black font-normal transition duration-150 ease-in-out motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)]"
           type="button"
           id="dropdownMenuButton1"
           data-te-dropdown-toggle-ref
