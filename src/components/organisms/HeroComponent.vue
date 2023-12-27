@@ -53,15 +53,15 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="relative w-10/12 h-[34vh] lg:h-[54vh] mx-auto my-32 rounded-3xl shadow-custom"
+    class="relative w-full md:w-10/12 h-[34vh] lg:h-[54vh] mx-auto my-16 md:my-32 md:rounded-3xl shadow-custom"
   >
     <img
       :src="image"
       alt="bg"
-      class="absolute z-[-1] w-full h-full object-cover rounded-3xl"
+      class="absolute z-[-1] w-full h-full object-cover md:rounded-3xl"
     />
     <h1
-      class="w-2/5 p-6 text-white text-lg md:text-xl lg:text-5xl xl:text-6xl font-bold"
+      class="w-3/5 md:w-2/5 p-6 text-white text-3xl md:text-xl lg:text-5xl xl:text-6xl font-bold"
     >
       <span id="animated-title"></span>
     </h1>
@@ -69,7 +69,7 @@ onUnmounted(() => {
       class="search-container absolute flex justify-center w-full"
       ref="searchBar"
     >
-      <div class="w-6/12 rounded-2xl shadow-custom">
+      <div class="w-full md:w-7/12 md:rounded-2xl shadow-custom">
         <SearchBar v-if="!isSearchBarVisible" />
       </div>
     </div>

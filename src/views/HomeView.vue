@@ -2,6 +2,7 @@
 import NavbarComponent from "@/components/organisms/NavbarComponent.vue";
 import HeroComponent from "@/components/organisms/HeroComponent.vue";
 import CardInfoComponent from "@/components/organisms/CardInfoComponent.vue";
+import LogoCompaniesComponent from "@/components/organisms/LogoCompaniesComponent.vue";
 </script>
 
 <template>
@@ -16,11 +17,7 @@ import CardInfoComponent from "@/components/organisms/CardInfoComponent.vue";
       </div>
     </section>
     <CardInfoComponent />
-    <section>
-      <div>
-        <p>section card confiance</p>
-      </div>
-    </section>
+    <LogoCompaniesComponent />
     <footer>
       <p>section footer</p>
     </footer>
