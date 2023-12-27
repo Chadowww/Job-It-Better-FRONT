@@ -1,9 +1,15 @@
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
+  state: {
+    isSearchBarVisible: false,
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    toggleSearchBarVisibility(state) {
+      state.isSearchBarVisible = !state.isSearchBarVisible;
+    },
+  },
   actions: {},
   modules: {},
 });

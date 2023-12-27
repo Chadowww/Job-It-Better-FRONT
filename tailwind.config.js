@@ -6,7 +6,11 @@ module.exports = {
     "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        custom: "0 6.25px 14px #c9cbcf, 0 0 2px #c9cbcf",
+      },
+    },
   },
   darkMode: "class",
   plugins: [require("tw-elements/dist/plugin.cjs")],
