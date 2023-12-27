@@ -1,12 +1,15 @@
-<script setup lang="ts">
-import vue from "vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <form action="" class="hidden lg:flex justify-between items-center w-4/12">
+  <form
+    action=""
+    class="search-bar flex justify-around items-center bg-[#f5f5f5] w-full rounded-2xl"
+  >
     <div class="flex flex-col justify-center items-center w-5/12">
       <div>
-        <label for="where" class="text-4xl font-bold py-2">Quoi?</label>
+        <label for="where" class="text-xs lg:text-2xl font-bold py-2"
+          >Quoi?</label
+        >
         <input
           type="text"
           name="where"
@@ -15,10 +18,10 @@ import vue from "vue";
         />
       </div>
     </div>
-    <div class="w-[2px] h-20 bg-gray-500 m-4"></div>
+    <div class="w-[2px] h-10 lg:h-20 bg-gray-500 my-4"></div>
     <div class="flex flex-col justify-center items-center w-5/12">
       <div>
-        <label for="what" class="text-4xl font-bold py-2">Où?</label>
+        <label for="what" class="text-xs lg:text-2xl font-bold py-2">Où?</label>
         <input
           type="text"
           name="what"
