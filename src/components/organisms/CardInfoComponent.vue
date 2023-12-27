@@ -6,7 +6,9 @@ import imgPurple from "@/assets/images/Image_4963.png";
 
 <template>
   <section class="w-10/12 m-auto">
-    <h2 class="text-6xl font-bold my-6">Trouver un <span>job</span>?</h2>
+    <h2 class="text-center md:text-left text-5xl md:text-6xl font-bold my-6">
+      Trouver un <span>job</span>?
+    </h2>
     <div class="mb-12">
       <div class="w-full flex flex-col md:flex-row justify-between py-3">
         <div class="w-full md:w-5/12 bg-[#7C948F80] rounded-2xl p-4 op">
