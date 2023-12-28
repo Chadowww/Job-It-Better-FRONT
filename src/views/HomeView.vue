@@ -3,6 +3,7 @@ import NavbarComponent from "@/components/organisms/NavbarComponent.vue";
 import HeroComponent from "@/components/organisms/HeroComponent.vue";
 import CardInfoComponent from "@/components/organisms/CardInfoComponent.vue";
 import LogoCompaniesComponent from "@/components/organisms/LogoCompaniesComponent.vue";
+import FooterComponent from "@/components/organisms/FooterComponent.vue";
 </script>
 
 <template>
@@ -18,9 +19,7 @@ import LogoCompaniesComponent from "@/components/organisms/LogoCompaniesComponen
     </section>
     <CardInfoComponent />
     <LogoCompaniesComponent />
-    <footer>
-      <p>section footer</p>
-    </footer>
+    <FooterComponent />
   </main>
 </template>
 
