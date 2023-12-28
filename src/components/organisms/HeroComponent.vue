@@ -58,7 +58,7 @@ onUnmounted(() => {
     <img
       :src="image"
       alt="bg"
-      class="absolute z-[-1] w-full h-full object-cover md:rounded-3xl"
+      class="absolute z-[-1] w-full h-full object-center md:object-cover md:rounded-3xl"
     />
     <h1
       class="w-3/5 md:w-2/5 p-6 text-white text-3xl md:text-xl lg:text-5xl xl:text-6xl font-bold"
