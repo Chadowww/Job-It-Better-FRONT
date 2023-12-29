@@ -5,13 +5,13 @@ import imgPurple from "@/assets/images/Image_4963.png";
 </script>
 
 <template>
-  <section class="w-10/12 m-auto">
+  <section class="my-16">
     <h2 class="text-center md:text-left text-5xl md:text-6xl font-bold my-6">
       Trouver un <span>job</span>?
     </h2>
-    <div class="mb-12">
+    <div class="mb-4">
       <div class="w-full flex flex-col md:flex-row justify-between py-3">
-        <div class="w-full md:w-5/12 bg-[#7C948F80] rounded-2xl p-4 op">
+        <div class="w-full md:w-5/12 bg-[#7C948F80] rounded-2xl p-4">
           <img
             :src="imgGreen"
             alt=""
@@ -31,7 +31,7 @@ import imgPurple from "@/assets/images/Image_4963.png";
         </div>
       </div>
     </div>
-    <div class="mb-12">
+    <div class="mb-4">
       <div
         class="w-full flex flex-col md:flex-row-reverse justify-between py-3"
       >
@@ -54,7 +54,7 @@ import imgPurple from "@/assets/images/Image_4963.png";
         </div>
       </div>
     </div>
-    <div class="mb-12">
+    <div class="mb-4">
       <div class="w-full flex flex-col md:flex-row justify-between py-3">
         <div class="w-full md:w-5/12 bg-[#C7B6E6] rounded-2xl p-4 op">
           <img
