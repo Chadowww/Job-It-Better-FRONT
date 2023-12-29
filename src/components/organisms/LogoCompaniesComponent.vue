@@ -28,7 +28,7 @@ const images = [
 </script>
 
 <template>
-  <section class="w-10/12 m-auto">
+  <section>
     <h2 class="text-center md:text-left text-5xl md:text-6xl font-bold my-6">
       Ils nous font <span class="text-green-900">confiance</span>
     </h2>

@@ -11,11 +11,6 @@ const isSearchBarVisible = computed(() => store.state.isSearchBarVisible);
 
 let searchBar = ref();
 
-const resizeHandler = () => {
-  const height = searchBar.value.clientHeight / -2;
-  searchBar.value.style.bottom = `${height}px`;
-};
-
 const scrollHandler = () => {
   let rect = searchBar.value.getBoundingClientRect();
   let currentVisibility = store.state.isSearchBarVisible;
@@ -41,19 +36,17 @@ onMounted(() => {
     typeSpeed: 70,
   });
 
-  resizeHandler();
   window.addEventListener("scroll", scrollHandler);
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", resizeHandler);
   window.removeEventListener("scroll", scrollHandler);
 });
 </script>
 
 <template>
-  <div
-    class="relative w-full md:w-10/12 h-[34vh] lg:h-[54vh] mx-auto my-16 md:my-32 md:rounded-3xl shadow-custom"
+  <section
+    class="relative w-full h-[34vh] lg:h-[54vh] mx-auto mt-16 md:mt-32 mb-24 md:rounded-3xl shadow-custom"
   >
     <img
       :src="image"
@@ -61,19 +54,19 @@ onUnmounted(() => {
       class="absolute z-[-1] w-full h-full object-center md:object-cover md:rounded-3xl"
     />
     <h1
-      class="w-3/5 md:w-2/5 p-6 text-white text-3xl md:text-xl lg:text-5xl xl:text-6xl font-bold"
+      class="w-3/5 md:w-2/5 p-6 text-white text-3xl sm:text-4xl md:text-4xl lg:text-6xl 2xl:text-7xl font-bold"
     >
       <span id="animated-title"></span>
     </h1>
     <div
-      class="search-container absolute flex justify-center w-full"
+      class="search-container flex justify-center w-full absolute bottom-0 transform translate-y-[50%]"
       ref="searchBar"
     >
       <div class="w-full md:w-7/12 md:rounded-2xl shadow-custom">
         <SearchBar v-if="!isSearchBarVisible" />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped lang="scss"></style>
