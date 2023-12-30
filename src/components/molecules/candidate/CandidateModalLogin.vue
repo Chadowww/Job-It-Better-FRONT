@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from "vue";
+import { defineProps, defineEmits } from "vue";
 import axios from "axios";
+import { errors, verifyPassword, verifEmail } from "@/utils/formValidations";
 
 const props = defineProps({
   toggleLogin: Boolean,
@@ -45,7 +46,7 @@ const login = () => {
   >
     <div
       @click.stop
-      class="w-11/12 md:w-8/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
+      class="w-11/12 md:w-8/12 lg:w-6/12 xl:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
     >
       <h2
         class="font-bold uppercase m-4 md:m-8 text-center text-black text-xl md:text-4xl"
@@ -110,18 +111,44 @@ const login = () => {
             <input
               type="email"
               name="email"
+              @input="verifEmail(data.email)"
               v-model="data.email"
+              class="focus:outline-none"
+              :class="{
+                '!border-2 !border-red-600':
+                  errors.email != '' && errors.email != null,
+                '!border-2 !border-green-600': errors.email === null,
+              }"
               placeholder="exemple.email@mail.fr"
             />
+            <div
+              v-if="errors.email != '' && errors.email != null"
+              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+            >
+              <p>{{ errors.email }}</p>
+            </div>
           </div>
           <div class="flex flex-col">
             <label for="password">Mot de passe</label>
             <input
               type="password"
               name="password"
+              @input="verifyPassword(data.password)"
               v-model="data.password"
               placeholder="Entre ton mot de passe"
+              class="focus:outline-none"
+              :class="{
+                '!border-2 !border-red-500':
+                  errors.password != '' && errors.password != null,
+                '!border-2 !border-green-600': errors.password === null,
+              }"
             />
+            <div
+              v-if="errors.password != '' && errors.password != null"
+              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+            >
+              <p>{{ errors.password }}</p>
+            </div>
           </div>
           <div class="w-full flex justify-between text-sm md:text-md my-2">
             <div class="flex">
@@ -137,6 +164,7 @@ const login = () => {
           <button
             @click="login"
             class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
+            :disabled="!Object.values(errors).every((value) => value === null)"
           >
             Se connectecter
           </button>
@@ -163,8 +191,8 @@ label {
 input {
   border: 1px solid black;
   border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
+  padding: 0.5rem;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 400px) {
