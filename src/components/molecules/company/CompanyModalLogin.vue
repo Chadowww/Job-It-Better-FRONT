@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
 import axios from "axios";
-import { errors, verifEmail, verifPassword } from "@/utils/formValidations";
+import { errors, verifEmail, verifyPassword } from "@/utils/formValidations";
 
 const props = defineProps({
   toggleLogin: Boolean,
@@ -40,7 +40,7 @@ const login = () => {
 </script>
 
 <template>
-  <teleport to="body">
+  <teleport to="nav">
     <div
       @click="emit('update:toggleLogin', false)"
       class="absolute top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
@@ -63,7 +63,7 @@ const login = () => {
                 name="email"
                 @input="verifEmail(data.email)"
                 v-model="data.email"
-                class="focus:outline-none"
+                class="focus:outline-none m-0 p-2"
                 :class="{
                   '!border-2 !border-red-600':
                     errors.email != '' && errors.email != null,
@@ -83,7 +83,7 @@ const login = () => {
               <input
                 type="password"
                 name="password"
-                @input="verifPassword(data.password)"
+                @input="verifyPassword(data.password)"
                 v-model="data.password"
                 placeholder="Entre ton mot de passe"
                 class="focus:outline-none"
@@ -142,7 +142,7 @@ input {
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
-  margin: 5px;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 400px) {
