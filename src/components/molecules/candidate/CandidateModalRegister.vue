@@ -4,6 +4,13 @@ import { UserFormType } from "@/types/UserFormType";
 import { CandidateFormType } from "@/types/CandidateFormType";
 import axios from "axios";
 import events from "events";
+import {
+  errors,
+  verifEmail,
+  verifyPassword,
+  verifyRepeatPassword,
+  verifyCandidate,
+} from "@/utils/formValidations";
 
 const props = defineProps({
   toggleRegister: Boolean,
@@ -139,29 +146,68 @@ const register = async (e: events) => {
             <input
               type="email"
               name="email"
+              @input="verifEmail(user.email)"
               v-model="user.email"
+              class="focus:outline-none"
+              :class="{
+                '!border-2 !border-red-600':
+                  errors.email != '' && errors.email != null,
+                '!border-2 !border-green-600': errors.email === null,
+              }"
               placeholder="exemple.email@mail.fr"
             />
+            <div
+              v-if="errors.email != '' && errors.email != null"
+              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+            >
+              <p>{{ errors.email }}</p>
+            </div>
           </div>
           <div class="flex flex-col">
             <label for="password">Mot de passe</label>
             <input
               type="password"
               name="password"
+              @input="verifyPassword(user.password)"
               v-model="user.password"
               placeholder="Entre ton mot de passe"
+              class="focus:outline-none"
+              :class="{
+                '!border-2 !border-red-500':
+                  errors.password != '' && errors.password != null,
+                '!border-2 !border-green-600': errors.password === null,
+              }"
             />
+            <div
+              v-if="errors.password != '' && errors.password != null"
+              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+            >
+              <p>{{ errors.password }}</p>
+            </div>
           </div>
           <div class="flex flex-col overflow-hidden">
-            <label for="repeatPassword" class="text-nowrap"
-              >Vérification mot de passe</label
-            >
+            <label for="password">Mot de passe</label>
             <input
               type="password"
-              name="repeatPassword"
+              name="password"
+              @input="verifyRepeatPassword(user.password, user.repeatPassword)"
               v-model="user.repeatPassword"
-              placeholder="Entre à nouveau ton mot de passe"
+              placeholder="Entre ton mot de passe"
+              class="focus:outline-none"
+              :class="{
+                '!border-2 !border-red-500':
+                  errors.repeatPassword != '' && errors.repeatPassword != null,
+                '!border-2 !border-green-600': errors.repeatPassword === null,
+              }"
             />
+            <div
+              v-if="
+                errors.repeatPassword != '' && errors.repeatPassword != null
+              "
+              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+            >
+              <p>{{ errors.repeatPassword }}</p>
+            </div>
           </div>
         </form>
         <form method="post" class="grid grid-cols-2 gap-2 font-bold">
@@ -170,8 +216,14 @@ const register = async (e: events) => {
             <input
               type="text"
               name="firstname"
+              @input="verifyCandidate(candidate)"
               v-model="candidate.firstname"
               placeholder="Entre ton prénom"
+              :class="{
+                '!border-2 !border-red-500':
+                  errors.candidate != null && errors.candidate != '',
+                '!border-2 !border-green-600': errors.candidate === null,
+              }"
             />
           </div>
           <div class="flex flex-col">
@@ -179,9 +231,21 @@ const register = async (e: events) => {
             <input
               type="text"
               name="lastname"
+              @input="verifyCandidate(candidate)"
               v-model="candidate.lastname"
               placeholder="Entre ton nom"
+              :class="{
+                '!border-2 !border-red-500':
+                  errors.candidate != null && errors.candidate != '',
+                '!border-2 !border-green-600': errors.candidate === null,
+              }"
             />
+          </div>
+          <div
+            v-if="errors.candidate != '' && errors.candidate != null"
+            class="border-2 border-red-600 p-2 text-red-600 rounded-md col-span-2"
+          >
+            <p>{{ errors.candidate }}</p>
           </div>
           <div>
             <input
@@ -218,6 +282,7 @@ const register = async (e: events) => {
         <button
           @click="register"
           class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
+          :disabled="!Object.values(errors).every((value) => value === null)"
         >
           S'inscrire
         </button>
@@ -236,7 +301,7 @@ input {
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
-  margin: 5px;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 400px) {
