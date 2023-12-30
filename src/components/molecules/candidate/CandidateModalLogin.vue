@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
 import axios from "axios";
-import { errors, verifPassword, verifEmail } from "@/utils/formValidations";
+import { errors, verifyPassword, verifEmail } from "@/utils/formValidations";
 
 const props = defineProps({
   toggleLogin: Boolean,
@@ -133,7 +133,7 @@ const login = () => {
             <input
               type="password"
               name="password"
-              @input="verifPassword(data.password)"
+              @input="verifyPassword(data.password)"
               v-model="data.password"
               placeholder="Entre ton mot de passe"
               class="focus:outline-none"
