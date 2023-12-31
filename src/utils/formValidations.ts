@@ -99,8 +99,6 @@ export function verifCompany(company: CompanyFormType): boolean {
 }
 
 export function verifyCandidate(candidate: CandidateFormType): boolean {
-  console.log(candidate);
-  console.log(candidateSchema.safeParse(candidate));
   const { success } = candidateSchema.safeParse(candidate);
   if (success) {
     errors.value.candidate = null;

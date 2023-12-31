@@ -25,11 +25,18 @@ const toggleCandidateRegistrationModalVisibility = () => {
 const register = async (e: any) => {
   e.preventDefault();
   const result = await userRegister(candidateUser);
-  console.log(result);
   candidate.user_id = Number(result);
-  if (await candidateRegister(candidate)) {
-    toggleCandidateRegistrationModalVisibility();
-    toggleCandidateLoginModalVisibility();
+  if (Number.isInteger(result)) {
+    if (await candidateRegister(candidate)) {
+      toggleCandidateRegistrationModalVisibility();
+      toggleCandidateLoginModalVisibility();
+    }
+  }
+  if (
+    !Number.isInteger(result) &&
+    result?.includes("This email is already used")
+  ) {
+    errors.value.email = "Cette adresse mail est déjà utilisée";
   }
 };
 </script>

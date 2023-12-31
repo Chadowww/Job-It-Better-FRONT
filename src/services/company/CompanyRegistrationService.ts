@@ -1,8 +1,5 @@
 import axios from "axios";
 import { CompanyFormType } from "@/types/CompanyFormType";
-import { defineEmits } from "vue";
-
-const emit = defineEmits(["update:toggleLogin", "update:toggleRegister"]);
 
 export const companyRegister = async (
   company: CompanyFormType
