@@ -51,8 +51,8 @@ export const errors = ref<errorsType>({
   email: "",
   password: "",
   repeatPassword: "",
-  company: null,
-  candidate: null,
+  company: "",
+  candidate: "",
 });
 
 export function verifEmail(email: string) {

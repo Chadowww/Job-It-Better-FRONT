@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
-import { UserFormType } from "@/types/UserFormType";
-import { CompanyFormType } from "@/types/CompanyFormType";
-import axios from "axios";
-import * as events from "events";
+import { useStore } from "vuex";
+import { companyUser } from "@/factories/userFactory";
+import { company } from "@/factories/companyFactory";
+import { userRegister } from "@/services/user/UserRegistrationService";
+import { companyRegister } from "@/services/company/CompanyRegistrationService";
 import {
   verifCompany,
   errors,
@@ -12,82 +12,36 @@ import {
   verifyRepeatPassword,
 } from "@/utils/formValidations";
 
-const props = defineProps({
-  toggleRegister: Boolean,
-});
+const store = useStore();
 
-const emit = defineEmits(["update:toggleLogin", "update:toggleRegister"]);
-
-const user: UserFormType = {
-  email: "",
-  password: "",
-  repeatPassword: "",
-  roles: 5,
-};
-const company: CompanyFormType = {
-  name: null,
-  phone: null,
-  address: null,
-  city: null,
-  country: null,
-  siret: null,
-  user_id: null,
+const toggleCompanyRegistrationModalVisibility = () => {
+  store.commit("toggleCompanyRegistrationModalVisibility");
 };
 
-const userRegister = async () => {
-  try {
-    const response = await axios.post(
-      "https://127.0.0.1:8000/user/create",
-      user,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.status === 201) {
-      company.user_id = response.data.user_id;
-    }
-  } catch (error: any) {
-    console.log(error);
-  }
+const toggleCompanyLoginModalVisibility = () => {
+  store.commit("toggleCompanyLoginModalVisibility");
 };
 
-const companyRegister = async () => {
-  try {
-    const response = await axios.post(
-      "https://127.0.0.1:8000/company/create",
-      company,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.status === 201) {
-      emit("update:toggleRegister", false);
-    }
-  } catch (error: any) {
-    console.log(error);
-  }
-};
-
-const register = async (e: events) => {
+const register = async (e: any) => {
   e.preventDefault();
-  await userRegister();
-  await companyRegister();
+  const result = await userRegister(companyUser);
+  company.user_id = Number(result);
+  if (await companyRegister(company)) {
+    toggleCompanyRegistrationModalVisibility();
+    toggleCompanyLoginModalVisibility();
+  }
 };
 </script>
 
 <template>
   <teleport to="nav">
     <div
-      @click="emit('update:toggleRegister', false)"
+      @click="toggleCompanyRegistrationModalVisibility"
       class="absolute z-[100] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
     >
       <div
         @click.stop
-        class="w-11/12 md:w-10/12 lg:w-8/12 xl:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
+        class="w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 2xl:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF]"
       >
         <h2
           class="font-bold uppercase m-4 md:m-8 text-center text-black text-xl md:text-4xl"
@@ -101,8 +55,8 @@ const register = async (e: events) => {
               <input
                 type="email"
                 name="email"
-                @input="verifEmail(user.email)"
-                v-model="user.email"
+                @input="verifEmail(companyUser.email)"
+                v-model="companyUser.email"
                 class="focus:outline-none"
                 :class="{
                   '!border-2 !border-red-600':
@@ -123,8 +77,8 @@ const register = async (e: events) => {
               <input
                 type="password"
                 name="password"
-                @input="verifyPassword(user.password)"
-                v-model="user.password"
+                @input="verifyPassword(companyUser.password)"
+                v-model="companyUser.password"
                 placeholder="Entre ton mot de passe"
                 class="focus:outline-none"
                 :class="{
@@ -146,9 +100,12 @@ const register = async (e: events) => {
                 type="password"
                 name="password"
                 @input="
-                  verifyRepeatPassword(user.password, user.repeatPassword)
+                  verifyRepeatPassword(
+                    companyUser.password,
+                    companyUser.repeatPassword
+                  )
                 "
-                v-model="user.repeatPassword"
+                v-model="companyUser.repeatPassword"
                 placeholder="Entre ton mot de passe"
                 class="focus:outline-none"
                 :class="{
@@ -282,7 +239,7 @@ const register = async (e: events) => {
                 class="w-full flex flex-col items-center justify-center md:flex-row md:justify-between text-sm md:text-md"
               >
                 <div class="flex w-10/12 md:w-auto">
-                  <input type="checkbox" required />
+                  <input type="checkbox" required="required" />
                   <p class="font-medium text-center">
                     Accepter les conditions
                     <span class="text-[#14532D] font-bold"
@@ -291,15 +248,6 @@ const register = async (e: events) => {
                     ?
                   </p>
                 </div>
-                <a
-                  @click="
-                    emit('update:toggleRegister', false);
-                    emit('update:toggleLogin', true);
-                  "
-                  class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out"
-                >
-                  Déjà encore inscrit ?
-                </a>
               </div>
               <div class="w-full flex justify-center items-center pt-8">
                 <button
@@ -311,6 +259,19 @@ const register = async (e: events) => {
                 >
                   S'inscrire
                 </button>
+              </div>
+              <div class="w-full flex justify-end">
+                <a
+                  @click="
+                    () => {
+                      toggleCompanyRegistrationModalVisibility();
+                      toggleCompanyLoginModalVisibility();
+                    }
+                  "
+                  class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out cursor-pointer"
+                >
+                  Déjà encore inscrit ?
+                </a>
               </div>
             </div>
           </form>

@@ -1,87 +1,47 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
-import { UserFormType } from "@/types/UserFormType";
-import { CandidateFormType } from "@/types/CandidateFormType";
-import axios from "axios";
-import events from "events";
+import { candidateUser } from "@/factories/userFactory";
+import { candidate } from "@/factories/candidateFactory";
+import { candidateRegister } from "@/services/candidate/CandidateRegistrationService";
+import { userRegister } from "@/services/user/UserRegistrationService";
 import {
   errors,
   verifEmail,
+  verifyCandidate,
   verifyPassword,
   verifyRepeatPassword,
-  verifyCandidate,
 } from "@/utils/formValidations";
+import { useStore } from "vuex";
 
-const props = defineProps({
-  toggleRegister: Boolean,
-});
+const store = useStore();
 
-const emit = defineEmits(["update:toggleLogin", "update:toggleRegister"]);
-
-const user: UserFormType = {
-  email: "",
-  password: "",
-  repeatPassword: "",
-  roles: 3,
-};
-const candidate: CandidateFormType = {
-  firstname: "",
-  lastname: "",
-  user_id: null,
-};
-const userRegister = async () => {
-  try {
-    const response = await axios.post(
-      "https://127.0.0.1:8000/user/create",
-      user,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.status === 201) {
-      candidate.user_id = response.data.user_id;
-    }
-  } catch (error: any) {
-    console.log(error);
-  }
+const toggleCandidateLoginModalVisibility = () => {
+  store.dispatch("toggleCandidateLoginModalVisibility");
 };
 
-const candidateRegister = async () => {
-  try {
-    const response = await axios.post(
-      "https://127.0.0.1:8000/candidate/create",
-      candidate,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (response.status === 201) {
-      emit("update:toggleRegister", false);
-    }
-  } catch (error: any) {
-    console.log(error);
-  }
+const toggleCandidateRegistrationModalVisibility = () => {
+  store.dispatch("toggleCandidateRegistrationModalVisibility");
 };
 
-const register = async (e: events) => {
+const register = async (e: any) => {
   e.preventDefault();
-  await userRegister();
-  await candidateRegister();
+  const result = await userRegister(candidateUser);
+  console.log(result);
+  candidate.user_id = Number(result);
+  if (await candidateRegister(candidate)) {
+    toggleCandidateRegistrationModalVisibility();
+    toggleCandidateLoginModalVisibility();
+  }
 };
 </script>
 
 <template>
   <div
-    @click="emit('update:toggleRegister', false)"
+    @click="toggleCandidateRegistrationModalVisibility"
     class="absolute top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div
       @click.stop
-      class="w-11/12 md:w-10/12 lg:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
+      class="w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 2xl:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
     >
       <h2
         class="font-bold uppercase m-4 md:m-8 text-center text-black text-4xl"
@@ -146,8 +106,8 @@ const register = async (e: events) => {
             <input
               type="email"
               name="email"
-              @input="verifEmail(user.email)"
-              v-model="user.email"
+              @input="verifEmail(candidateUser.email)"
+              v-model="candidateUser.email"
               class="focus:outline-none"
               :class="{
                 '!border-2 !border-red-600':
@@ -168,8 +128,8 @@ const register = async (e: events) => {
             <input
               type="password"
               name="password"
-              @input="verifyPassword(user.password)"
-              v-model="user.password"
+              @input="verifyPassword(candidateUser.password)"
+              v-model="candidateUser.password"
               placeholder="Entre ton mot de passe"
               class="focus:outline-none"
               :class="{
@@ -190,8 +150,13 @@ const register = async (e: events) => {
             <input
               type="password"
               name="password"
-              @input="verifyRepeatPassword(user.password, user.repeatPassword)"
-              v-model="user.repeatPassword"
+              @input="
+                verifyRepeatPassword(
+                  candidateUser.password,
+                  candidateUser.repeatPassword
+                )
+              "
+              v-model="candidateUser.repeatPassword"
               placeholder="Entre ton mot de passe"
               class="focus:outline-none"
               :class="{
@@ -258,7 +223,7 @@ const register = async (e: events) => {
         </form>
         <div class="w-full flex justify-between">
           <div class="flex">
-            <input type="checkbox" />
+            <input type="checkbox" required="required" />
             <p class="font-medium">
               Accepter les conditions
               <span class="text-[#14532D] font-bold"
@@ -267,15 +232,6 @@ const register = async (e: events) => {
               ?
             </p>
           </div>
-          <a
-            @click="
-              emit('update:toggleRegister', false);
-              emit('update:toggleLogin', true);
-            "
-            class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out"
-          >
-            Déjà encore inscrit ?
-          </a>
         </div>
       </div>
       <div class="w-full flex justify-center items-center pt-8">
@@ -286,6 +242,19 @@ const register = async (e: events) => {
         >
           S'inscrire
         </button>
+      </div>
+      <div class="w-full flex justify-end">
+        <a
+          @click="
+            () => {
+              toggleCandidateRegistrationModalVisibility();
+              toggleCandidateLoginModalVisibility();
+            }
+          "
+          class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out cursor-pointer"
+        >
+          Déjà encore inscrit ?
+        </a>
       </div>
     </div>
   </div>

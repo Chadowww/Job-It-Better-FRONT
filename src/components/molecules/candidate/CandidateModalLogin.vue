@@ -1,52 +1,33 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
-import axios from "axios";
+import { useStore } from "vuex";
 import { errors, verifyPassword, verifEmail } from "@/utils/formValidations";
+import { userLogin } from "@/services/user/UserLoginService";
 
-const props = defineProps({
-  toggleLogin: Boolean,
-});
-
-const emit = defineEmits(["update:toggleLogin", "update:toggleRegister"]);
-
+const store = useStore();
+const toggleCandidateLoginModalVisibility = () => {
+  store.dispatch("toggleCandidateLoginModalVisibility");
+};
+const toggleCandidateRegistrationModalVisibility = () => {
+  store.dispatch("toggleCandidateRegistrationModalVisibility");
+};
 const data = {
   email: "",
   password: "",
 };
 
-const userLogin = async () => {
-  try {
-    const response = await axios.post("https://127.0.0.1:8000/login", data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(response);
-    if (response.status === 200) {
-      localStorage.setItem("token", response.data.token);
-      setTimeout(() => {
-        localStorage.removeItem("token");
-      }, 3600000);
-      emit("update:toggleLogin", false);
-      location.reload();
-    }
-  } catch (error: any) {
-    console.log(error);
-  }
-};
 const login = () => {
-  userLogin();
+  userLogin(data);
 };
 </script>
 
 <template>
   <div
-    @click="emit('update:toggleLogin', false)"
+    @click="toggleCandidateLoginModalVisibility"
     class="absolute top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div
       @click.stop
-      class="w-11/12 md:w-8/12 lg:w-6/12 xl:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
+      class="w-11/12 md:w-8/12 lg:w-8/12 xl:w-6/12 2xl:w-4/12 rounded-2xl flex flex-col justify-around items-center bg-[#F8F9FAFF] p-2 md:p-8"
     >
       <h2
         class="font-bold uppercase m-4 md:m-8 text-center text-black text-xl md:text-4xl"
@@ -171,8 +152,13 @@ const login = () => {
         </div>
         <div class="w-full flex justify-end">
           <a
-            href=""
-            class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out"
+            @click="
+              () => {
+                toggleCandidateLoginModalVisibility();
+                toggleCandidateRegistrationModalVisibility();
+              }
+            "
+            class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out cursor-pointer"
           >
             Pas encore inscrit ?
           </a>
