@@ -4,7 +4,6 @@ import axios from "axios";
 export const userRegister = async (
   companyUser: UserFormType
 ): Promise<string | undefined> => {
-  console.log(companyUser);
   try {
     const response = await axios.post(
       "https://127.0.0.1:8000/user/create",
@@ -20,6 +19,6 @@ export const userRegister = async (
     }
   } catch (error: any) {
     console.log(error);
-    return undefined;
+    return error.response.data.error;
   }
 };
