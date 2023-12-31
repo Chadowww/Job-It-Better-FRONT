@@ -15,8 +15,11 @@ const data = {
   password: "",
 };
 
-const login = () => {
-  userLogin(data);
+const login = async () => {
+  const result = await userLogin(data);
+  if (result === "Invalid credentials.") {
+    errors.value.password = "Email ou mot de passe incorrect";
+  }
 };
 </script>
 
@@ -145,7 +148,6 @@ const login = () => {
           <button
             @click="login"
             class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
-            :disabled="!Object.values(errors).every((value) => value === null)"
           >
             Se connectecter
           </button>
