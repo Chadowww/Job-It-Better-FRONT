@@ -5,7 +5,7 @@ type LoginData = {
   password: string;
 };
 
-export const userLogin = async (data: LoginData) => {
+export const userLogin = async (data: LoginData): Promise<string | void> => {
   try {
     const response = await axios.post("https://127.0.0.1:8000/login", data, {
       headers: {
@@ -21,5 +21,6 @@ export const userLogin = async (data: LoginData) => {
     }
   } catch (error: any) {
     console.log(error);
+    return error.response.data.error;
   }
 };
