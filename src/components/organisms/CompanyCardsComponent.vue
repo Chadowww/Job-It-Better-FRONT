@@ -1,27 +1,16 @@
 <script setup lang="ts">
-import axios from "axios";
 import { onMounted, ref } from "vue";
 import { CompanyCardType } from "@/types/CompanyCardType";
+import { getCompanys } from "@/services/API/company/CompanyService";
 
-const companys = ref<Array<CompanyCardType>>([]);
+let companys = ref<Array<CompanyCardType>>([]);
 
-const getCompanys = async () => {
-  try {
-    const response = await axios.get(
-      "https://127.0.0.1:8000/company/top-offers",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    companys.value = response.data;
-  } catch (e) {
-    console.log(e);
+onMounted(async () => {
+  const result = await getCompanys();
+  if (result) {
+    companys.value = result;
   }
-};
-
-onMounted(getCompanys);
+});
 </script>
 
 <template>
