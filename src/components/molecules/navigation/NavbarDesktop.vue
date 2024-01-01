@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import logo from "@/assets/images/logo-allonge.png";
-import CandidateButtonLogin from "@/components/molecules/candidate/CandidateButtonLogin.vue";
-import CandidateButtonRegister from "@/components/molecules/candidate/CandidateButtonRegister.vue";
-import CompanyButtonLogin from "@/components/molecules/company/CompanyButtonLogin.vue";
-import CompanyButtonRegister from "@/components/molecules/company/CompanyButtonRegister.vue";
+import CandidateButtonLogin from "@/components/atoms/candidate/CandidateButtonLogin.vue";
+import CandidateButtonRegister from "@/components/atoms/candidate/CandidateButtonRegister.vue";
+import CompanyButtonLogin from "@/components/atoms/company/CompanyButtonLogin.vue";
+import CompanyButtonRegister from "@/components/atoms/company/CompanyButtonRegister.vue";
 import LogoutButton from "@/components/molecules/LogoutButton.vue";
 import SearchBar from "@/components/atoms/SearchBar.vue";
 import { useStore } from "vuex";
