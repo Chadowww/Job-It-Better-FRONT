@@ -54,7 +54,7 @@ onUnmounted(() => {
       class="absolute z-[-1] w-full h-full object-center md:object-cover md:rounded-3xl"
     />
     <h1
-      class="w-3/5 md:w-3/5 p-6 text-white text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] 2xl:text-[6rem] font-bold"
+      class="w-3/5 md:w-3/5 p-6 text-white text-xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-[5rem] 2xl:text-[6rem] font-bold"
     >
       <span id="animated-title"></span>
     </h1>
