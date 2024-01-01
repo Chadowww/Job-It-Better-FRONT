@@ -10,19 +10,19 @@ import {
   verifyPassword,
   verifyRepeatPassword,
 } from "@/utils/formValidations";
-import {
-  toggleCandidateLoginModalVisibility,
-  toggleCandidateRegistrationModalVisibility,
-} from "@/utils/modalVisibility";
+import { useModalVisibility } from "@/utils/modalVisibility";
+import { useStore } from "vuex";
 
+const store = useStore();
+const modalVisibility = useModalVisibility(store);
 const register = async (e: any) => {
   e.preventDefault();
   const result = await userRegister(candidateUser);
   candidate.user_id = Number(result);
   if (Number.isInteger(result)) {
     if (await candidateRegister(candidate)) {
-      toggleCandidateRegistrationModalVisibility();
-      toggleCandidateLoginModalVisibility();
+      modalVisibility.toggleCandidateRegistrationModalVisibility();
+      modalVisibility.toggleCandidateLoginModalVisibility();
     }
   }
   if (
@@ -37,7 +37,7 @@ const register = async (e: any) => {
 <template>
   <teleport to="nav">
     <div
-      @click="toggleCandidateRegistrationModalVisibility"
+      @click="modalVisibility.toggleCandidateRegistrationModalVisibility"
       class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
     >
       <div
@@ -249,8 +249,8 @@ const register = async (e: any) => {
           <a
             @click="
               () => {
-                toggleCandidateRegistrationModalVisibility();
-                toggleCandidateLoginModalVisibility();
+                modalVisibility.toggleCandidateRegistrationModalVisibility();
+                modalVisibility.toggleCandidateLoginModalVisibility();
               }
             "
             class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out cursor-pointer"
