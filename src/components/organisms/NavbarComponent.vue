@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, Ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import logo from "@/assets/images/logo-allonge.png";
 import { Dropdown, Ripple, initTE } from "tw-elements";
@@ -9,38 +9,12 @@ import CompanyButtonLogin from "@/components/molecules/company/CompanyButtonLogi
 import CompanyButtonRegister from "@/components/molecules/company/CompanyButtonRegister.vue";
 import LogoutButton from "@/components/molecules/LogoutButton.vue";
 import SearchBar from "@/components/atoms/SearchBar.vue";
-import CompanyModalRegister from "@/components/molecules/company/CompanyModalRegister.vue";
-import CompanyModalLogin from "@/components/molecules/company/CompanyModalLogin.vue";
-import CandidateModalRegister from "@/components/molecules/candidate/CandidateModalRegister.vue";
-import CandidateModalLogin from "@/components/molecules/candidate/CandidateModalLogin.vue";
-import {
-  isCandidateLoginModalVisible,
-  isCandidateRegistrationModalVisible,
-  isCompanyLoginModalVisible,
-  isCompanyRegistrationModalVisible,
-  toggleCandidateRegistrationModalVisibility,
-  toggleCandidateLoginModalVisibility,
-  toggleCompanyRegistrationModalVisibility,
-  toggleCompanyLoginModalVisibility,
-} from "@/utils/modalVisibility";
+import NavbarMobile from "@/components/molecules/NavbarMobile.vue";
 
 const store = useStore();
 const isSearchBarVisible = computed(() => store.state.isSearchBarVisible);
 
 const shouldHide = ref(false);
-const toggleNav = ref(false);
-const toggleRegister = ref(false);
-const toggleLogin = ref(false);
-
-const toggles = {
-  nav: toggleNav,
-  register: toggleRegister,
-  login: toggleLogin,
-};
-
-function setToggle(toggle: Ref<boolean>) {
-  toggle.value = !toggle.value;
-}
 
 onMounted(() => {
   initTE({ Dropdown, Ripple });
@@ -193,129 +167,8 @@ const setShouldHide = () => {
         </a>
       </div>
     </div>
-    <div
-      class="md:hidden fixed z-[90] w-full p-4 bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
-    >
-      <span
-        class="absolute z-[90] top-5 left-5 transform scale-[150%]"
-        @click="setToggle(toggles.nav)"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 text-black"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </span>
-      <a href="/">
-        <img :src="logo" alt="Logo JobItBetter" class="w-8/12 m-auto" />
-      </a>
-      <transition name="left-nav">
-        <div
-          class="w-screen h-screen absolute flex flex-col justify-around items-center top-0 left-0 bg-[#f5f5f5] mt-16 pb-16"
-          v-if="toggleNav"
-        >
-          <h3 class="text-2xl font-bold" @click="setToggle(toggles.register)">
-            Espace candidats
-          </h3>
-          <transition name="accordion-register">
-            <div
-              v-if="toggleRegister"
-              class="w-full h-20 overflow-hidden text-center"
-            >
-              <h4
-                class="font-bold my-2"
-                @click="toggleCandidateRegistrationModalVisibility"
-              >
-                Inscription
-              </h4>
-              <h4
-                class="font-bold my-2"
-                @click="toggleCandidateLoginModalVisibility"
-              >
-                Connexion
-              </h4>
-            </div>
-          </transition>
-          <hr />
-          <h3 class="text-2xl font-bold" @click="setToggle(toggles.login)">
-            Espace recruteurs
-          </h3>
-          <transition name="accordion-register">
-            <div
-              v-if="toggleLogin"
-              class="w-full h-20 overflow-hidden text-center"
-            >
-              <h4
-                class="font-bold my-2"
-                @click="toggleCompanyRegistrationModalVisibility"
-              >
-                Inscription
-              </h4>
-              <h4
-                class="font-bold my-2"
-                @click="toggleCompanyLoginModalVisibility"
-              >
-                Connexion
-              </h4>
-            </div>
-          </transition>
-          <hr />
-          <h3 class="text-2xl font-bold">offres</h3>
-          <hr />
-          <h3 class="text-2xl font-bold">offres par villes</h3>
-          <hr />
-          <a href="mailto:externatic@hotmail.fr">
-            <h3 class="text-2xl font-bold">contact</h3>
-          </a>
-        </div>
-      </transition>
-    </div>
+    <NavbarMobile />
   </nav>
-  <CompanyModalRegister v-if="isCompanyRegistrationModalVisible" />
-  <CompanyModalLogin v-if="isCompanyLoginModalVisible" />
-  <CandidateModalRegister v-if="isCandidateRegistrationModalVisible" />
-  <CandidateModalLogin v-if="isCandidateLoginModalVisible" />
 </template>
 
-<style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.left-nav-enter-active,
-.left-nav-leave-active {
-  transition: left 0.5s ease;
-}
-.left-nav-leave-to,
-.left-nav-enter-from {
-  left: -100%;
-}
-
-.accordion-register-enter-active,
-.accordion-register-leave-active {
-  transition: height 1s ease;
-}
-.accordion-register-enter-from,
-.accordion-register-leave-to {
-  height: 0;
-}
-
-hr {
-  width: 80%;
-  border: 1px solid gray;
-}
-</style>
+<style scoped lang="scss"></style>
