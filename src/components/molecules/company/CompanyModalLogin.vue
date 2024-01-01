@@ -1,18 +1,11 @@
 <script setup lang="ts">
 import { errors, verifEmail, verifyPassword } from "@/utils/formValidations";
 import { userLogin } from "@/services/user/UserLoginService";
+import { useModalVisibility } from "@/utils/modalVisibility";
 import { useStore } from "vuex";
 
 const store = useStore();
-
-const toggleCompanyLoginModalVisibility = () => {
-  store.commit("toggleCompanyLoginModalVisibility");
-};
-
-const toggleCompanyRegistrationModalVisibility = () => {
-  store.commit("toggleCompanyRegistrationModalVisibility");
-};
-
+const modalVisibility = useModalVisibility(store);
 const data = {
   email: "",
   password: "",
@@ -26,7 +19,7 @@ const login = () => {
 <template>
   <teleport to="nav">
     <div
-      @click="toggleCompanyLoginModalVisibility"
+      @click="modalVisibility.toggleCompanyLoginModalVisibility"
       class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
     >
       <div
@@ -106,8 +99,8 @@ const login = () => {
             <a
               @click="
                 () => {
-                  toggleCompanyLoginModalVisibility();
-                  toggleCompanyRegistrationModalVisibility();
+                  modalVisibility.toggleCompanyLoginModalVisibility();
+                  modalVisibility.toggleCompanyRegistrationModalVisibility();
                 }
               "
               class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out cursor-pointer"

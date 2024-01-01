@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import NavbarComponent from "@/components/organisms/NavbarComponent.vue";
-import HeroComponent from "@/components/organisms/HeroComponent.vue";
-import CardInfoComponent from "@/components/organisms/CardInfoComponent.vue";
-import LogoCompaniesComponent from "@/components/organisms/LogoCompaniesComponent.vue";
-import FooterComponent from "@/components/organisms/FooterComponent.vue";
-import CompanyCards from "@/components/organisms/CompanyCardsComponent.vue";
+import NavbarComponent from "@/components/organisms/global/NavbarComponent.vue";
+import HeroComponent from "@/components/organisms/home/HeroComponent.vue";
+import CardInfoComponent from "@/components/organisms/home/CardInfoComponent.vue";
+import LogoCompaniesComponent from "@/components/organisms/home/LogoCompaniesComponent.vue";
+import FooterComponent from "@/components/organisms/global/FooterComponent.vue";
+import CompanyCards from "@/components/organisms/home/CompanyCardsComponent.vue";
 </script>
 
 <template>

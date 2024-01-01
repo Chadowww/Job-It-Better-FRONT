@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useStore } from "vuex";
 import { companyUser } from "@/factories/userFactory";
 import { company } from "@/factories/companyFactory";
 import { userRegister } from "@/services/user/UserRegistrationService";
@@ -11,24 +10,19 @@ import {
   verifyPassword,
   verifyRepeatPassword,
 } from "@/utils/formValidations";
+import { useModalVisibility } from "@/utils/modalVisibility";
+import { useStore } from "vuex";
 
 const store = useStore();
-
-const toggleCompanyRegistrationModalVisibility = () => {
-  store.commit("toggleCompanyRegistrationModalVisibility");
-};
-
-const toggleCompanyLoginModalVisibility = () => {
-  store.commit("toggleCompanyLoginModalVisibility");
-};
+const modalVisibility = useModalVisibility(store);
 
 const register = async (e: any) => {
   e.preventDefault();
   const result = await userRegister(companyUser);
   company.user_id = Number(result);
   if (await companyRegister(company)) {
-    toggleCompanyRegistrationModalVisibility();
-    toggleCompanyLoginModalVisibility();
+    modalVisibility.toggleCompanyRegistrationModalVisibility();
+    modalVisibility.toggleCompanyLoginModalVisibility();
   }
 };
 </script>
@@ -36,7 +30,7 @@ const register = async (e: any) => {
 <template>
   <teleport to="nav">
     <div
-      @click="toggleCompanyRegistrationModalVisibility"
+      @click="modalVisibility.toggleCompanyRegistrationModalVisibility()"
       class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
     >
       <div
@@ -264,8 +258,8 @@ const register = async (e: any) => {
                 <a
                   @click="
                     () => {
-                      toggleCompanyRegistrationModalVisibility();
-                      toggleCompanyLoginModalVisibility();
+                      modalVisibility.toggleCompanyRegistrationModalVisibility();
+                      modalVisibility.toggleCompanyLoginModalVisibility();
                     }
                   "
                   class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out cursor-pointer"

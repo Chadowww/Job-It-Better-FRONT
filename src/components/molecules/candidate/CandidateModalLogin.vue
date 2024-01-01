@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { useStore } from "vuex";
 import { errors, verifyPassword, verifEmail } from "@/utils/formValidations";
 import { userLogin } from "@/services/user/UserLoginService";
+import { useModalVisibility } from "@/utils/modalVisibility";
+import { useStore } from "vuex";
 
 const store = useStore();
-const toggleCandidateLoginModalVisibility = () => {
-  store.dispatch("toggleCandidateLoginModalVisibility");
-};
-const toggleCandidateRegistrationModalVisibility = () => {
-  store.dispatch("toggleCandidateRegistrationModalVisibility");
-};
+const modalVisibility = useModalVisibility(store);
 const data = {
   email: "",
   password: "",
@@ -26,7 +22,7 @@ const login = async () => {
 <template>
   <teleport to="nav">
     <div
-      @click="toggleCandidateLoginModalVisibility"
+      @click="modalVisibility.toggleCandidateLoginModalVisibility"
       class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
     >
       <div
@@ -157,8 +153,8 @@ const login = async () => {
             <a
               @click="
                 () => {
-                  toggleCandidateLoginModalVisibility();
-                  toggleCandidateRegistrationModalVisibility();
+                  modalVisibility.toggleCandidateLoginModalVisibility();
+                  modalVisibility.toggleCandidateRegistrationModalVisibility();
                 }
               "
               class="text-green-900 font-medium hover:underline hover:text-green-950 transition ease-in-out cursor-pointer"
