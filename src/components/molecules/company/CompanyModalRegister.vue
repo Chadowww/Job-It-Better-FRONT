@@ -37,7 +37,7 @@ const register = async (e: any) => {
   <teleport to="nav">
     <div
       @click="toggleCompanyRegistrationModalVisibility"
-      class="absolute z-[100] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
+      class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
     >
       <div
         @click.stop
