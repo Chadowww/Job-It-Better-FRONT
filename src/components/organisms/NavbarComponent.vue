@@ -13,33 +13,20 @@ import CompanyModalRegister from "@/components/molecules/company/CompanyModalReg
 import CompanyModalLogin from "@/components/molecules/company/CompanyModalLogin.vue";
 import CandidateModalRegister from "@/components/molecules/candidate/CandidateModalRegister.vue";
 import CandidateModalLogin from "@/components/molecules/candidate/CandidateModalLogin.vue";
+import {
+  isCandidateLoginModalVisible,
+  isCandidateRegistrationModalVisible,
+  isCompanyLoginModalVisible,
+  isCompanyRegistrationModalVisible,
+  toggleCandidateRegistrationModalVisibility,
+  toggleCandidateLoginModalVisibility,
+  toggleCompanyRegistrationModalVisibility,
+  toggleCompanyLoginModalVisibility,
+} from "@/utils/modalVisibility";
 
 const store = useStore();
 const isSearchBarVisible = computed(() => store.state.isSearchBarVisible);
-const isCandidateRegistrationModalVisible = computed(
-  () => store.state.isCandidateRegistrationModalVisible
-);
-const isCandidateLoginModalVisible = computed(
-  () => store.state.isCandidateLoginModalVisible
-);
-const isCompanyLoginModalVisible = computed(
-  () => store.state.isCompanyLoginModalVisible
-);
-const isCompanyRegistrationModalVisible = computed(
-  () => store.state.isCompanyRegistrationModalVisible
-);
-const toggleCompanyRegistrationModalVisibility = () => {
-  store.dispatch("toggleCompanyRegistrationModalVisibility");
-};
-const toggleCompanyLoginModalVisibility = () => {
-  store.dispatch("toggleCompanyLoginModalVisibility");
-};
-const toggleCandidateLoginModalVisibility = () => {
-  store.dispatch("toggleCandidateLoginModalVisibility");
-};
-const toggleCandidateRegistrationModalVisibility = () => {
-  store.dispatch("toggleCandidateRegistrationModalVisibility");
-};
+
 const shouldHide = ref(false);
 const toggleNav = ref(false);
 const toggleRegister = ref(false);

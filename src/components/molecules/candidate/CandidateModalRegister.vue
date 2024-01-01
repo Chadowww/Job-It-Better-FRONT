@@ -10,17 +10,10 @@ import {
   verifyPassword,
   verifyRepeatPassword,
 } from "@/utils/formValidations";
-import { useStore } from "vuex";
-
-const store = useStore();
-
-const toggleCandidateLoginModalVisibility = () => {
-  store.dispatch("toggleCandidateLoginModalVisibility");
-};
-
-const toggleCandidateRegistrationModalVisibility = () => {
-  store.dispatch("toggleCandidateRegistrationModalVisibility");
-};
+import {
+  toggleCandidateLoginModalVisibility,
+  toggleCandidateRegistrationModalVisibility,
+} from "@/utils/modalVisibility";
 
 const register = async (e: any) => {
   e.preventDefault();

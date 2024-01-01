@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useStore } from "vuex";
 import { companyUser } from "@/factories/userFactory";
 import { company } from "@/factories/companyFactory";
 import { userRegister } from "@/services/user/UserRegistrationService";
@@ -11,16 +10,11 @@ import {
   verifyPassword,
   verifyRepeatPassword,
 } from "@/utils/formValidations";
+import {
+  toggleCompanyRegistrationModalVisibility,
+  toggleCompanyLoginModalVisibility,
+} from "@/utils/modalVisibility";
 
-const store = useStore();
-
-const toggleCompanyRegistrationModalVisibility = () => {
-  store.commit("toggleCompanyRegistrationModalVisibility");
-};
-
-const toggleCompanyLoginModalVisibility = () => {
-  store.commit("toggleCompanyLoginModalVisibility");
-};
 
 const register = async (e: any) => {
   e.preventDefault();

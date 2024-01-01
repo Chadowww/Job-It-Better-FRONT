@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { useStore } from "vuex";
 import { errors, verifyPassword, verifEmail } from "@/utils/formValidations";
 import { userLogin } from "@/services/user/UserLoginService";
+import {
+  toggleCandidateLoginModalVisibility,
+  toggleCandidateRegistrationModalVisibility,
+} from "@/utils/modalVisibility";
 
-const store = useStore();
-const toggleCandidateLoginModalVisibility = () => {
-  store.dispatch("toggleCandidateLoginModalVisibility");
-};
-const toggleCandidateRegistrationModalVisibility = () => {
-  store.dispatch("toggleCandidateRegistrationModalVisibility");
-};
 const data = {
   email: "",
   password: "",

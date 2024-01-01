@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "vuex";
-
 import CompanyModalRegister from "@/components/molecules/company/CompanyModalRegister.vue";
-
-const store = useStore();
-const isCompanyRegistrationModalVisible = computed(
-  () => store.state.isCompanyRegistrationModalVisible
-);
-const toggleCompanyRegistrationModalVisibility = () => {
-  store.dispatch("toggleCompanyRegistrationModalVisibility");
-};
+import {
+  isCompanyRegistrationModalVisible,
+  toggleCompanyRegistrationModalVisibility,
+} from "@/utils/modalVisibility";
 </script>
 
 <template>

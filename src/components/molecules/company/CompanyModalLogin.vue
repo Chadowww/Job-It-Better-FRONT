@@ -1,17 +1,10 @@
 <script setup lang="ts">
 import { errors, verifEmail, verifyPassword } from "@/utils/formValidations";
 import { userLogin } from "@/services/user/UserLoginService";
-import { useStore } from "vuex";
-
-const store = useStore();
-
-const toggleCompanyLoginModalVisibility = () => {
-  store.commit("toggleCompanyLoginModalVisibility");
-};
-
-const toggleCompanyRegistrationModalVisibility = () => {
-  store.commit("toggleCompanyRegistrationModalVisibility");
-};
+import {
+  toggleCompanyLoginModalVisibility,
+  toggleCompanyRegistrationModalVisibility,
+} from "@/utils/modalVisibility";
 
 const data = {
   email: "",
