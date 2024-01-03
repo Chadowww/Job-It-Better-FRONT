@@ -3,10 +3,10 @@ import logo from "@/assets/images/newLogo.png";
 </script>
 
 <template>
-  <footer class="w-full bg-[#f5f5f5] mt-12 px-12 md:pt-12">
+  <footer class="w-full bg-[#f5f5f5] px-12 py-6">
     <div class="w-full flex justify-around">
       <div class="hidden lg:flex w-3/12 justify-center">
-        <img :src="logo" alt="Logo JobItBetter" class="w-1/2" />
+        <img :src="logo" alt="Logo JobItBetter" class="w-3/12" />
       </div>
       <div
         class="hidden md:flex w-4/12 lg:w-3/12 flex-col justify-center items-center"
