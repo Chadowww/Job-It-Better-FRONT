@@ -33,7 +33,7 @@ const setShouldHide = () => {
 
 <template>
   <div
-    class="hidden fixed z-[100] md:flex justify-between items-center w-full px-4 bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
+    class="hidden fixed z-[100] md:flex justify-between items-center h-24 w-full px-4 bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
   >
     <div class="w-2/12 my-4" v-if="!shouldHide">
       <a href="/public">
