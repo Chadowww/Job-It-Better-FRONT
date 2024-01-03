@@ -5,7 +5,7 @@ import { candidateRegister } from "@/services/candidate/CandidateRegistrationSer
 import { userRegister } from "@/services/user/UserRegistrationService";
 import {
   errors,
-  verifEmail,
+  verifyEmail,
   verifyCandidate,
   verifyPassword,
   verifyRepeatPassword,
@@ -107,7 +107,7 @@ const register = async (e: any) => {
               <input
                 type="email"
                 name="email"
-                @input="verifEmail(candidateUser.email)"
+                @input="verifyEmail(candidateUser.email)"
                 v-model="candidateUser.email"
                 class="focus:outline-none"
                 :class="{
