@@ -19,6 +19,14 @@ axios.interceptors.response.use(
       localStorage.removeItem("token");
       window.location.href = "/";
     }
+    if (
+      error.response.data ===
+      "A security token is required but the token storage is empty."
+    ) {
+      console.log("Pas de token !");
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    }
     return Promise.reject(error);
   }
 );
