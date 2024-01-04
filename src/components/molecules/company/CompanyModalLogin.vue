@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { errors, verifEmail, verifyPassword } from "@/utils/formValidations";
+import { errors, verifyEmail, verifyPassword } from "@/utils/formValidations";
 import { userLogin } from "@/services/user/UserLoginService";
 import { useModalVisibility } from "@/utils/modalVisibility";
 import { useStore } from "vuex";
@@ -38,7 +38,7 @@ const login = () => {
               <input
                 type="email"
                 name="email"
-                @input="verifEmail(data.email)"
+                @input="verifyEmail(data.email)"
                 v-model="data.email"
                 class="focus:outline-none m-0 p-2"
                 :class="{

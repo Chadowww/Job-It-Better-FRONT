@@ -55,7 +55,7 @@ export const errors = ref<errorsType>({
   candidate: "",
 });
 
-export function verifEmail(email: string) {
+export function verifyEmail(email: string) {
   const { success } = emailSchema.safeParse(email);
   if (success) {
     errors.value.email = null;
@@ -86,7 +86,7 @@ export function verifyRepeatPassword(password: string, repeatPassword: string) {
   }
 }
 
-export function verifCompany(company: CompanyFormType): boolean {
+export function verifyCompany(company: CompanyFormType): boolean {
   const { success } = companySchema.safeParse(company);
   if (success) {
     errors.value.company = null;

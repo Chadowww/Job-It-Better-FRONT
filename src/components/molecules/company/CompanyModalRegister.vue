@@ -4,9 +4,9 @@ import { company } from "@/factories/companyFactory";
 import { userRegister } from "@/services/user/UserRegistrationService";
 import { companyRegister } from "@/services/company/CompanyRegistrationService";
 import {
-  verifCompany,
+  verifyCompany,
   errors,
-  verifEmail,
+  verifyEmail,
   verifyPassword,
   verifyRepeatPassword,
 } from "@/utils/formValidations";
@@ -49,7 +49,7 @@ const register = async (e: any) => {
               <input
                 type="email"
                 name="email"
-                @input="verifEmail(companyUser.email)"
+                @input="verifyEmail(companyUser.email)"
                 v-model="companyUser.email"
                 class="focus:outline-none"
                 :class="{
@@ -125,7 +125,7 @@ const register = async (e: any) => {
               <input
                 type="text"
                 name="name"
-                @input="verifCompany(company)"
+                @input="verifyCompany(company)"
                 v-model="company.name"
                 placeholder="Entrez le nom de la société"
                 required="required"
@@ -141,7 +141,7 @@ const register = async (e: any) => {
               <input
                 type="text"
                 name="phone"
-                @input="verifCompany(company)"
+                @input="verifyCompany(company)"
                 v-model="company.phone"
                 placeholder="Entrez le numéro de téléphone"
                 required="required"
@@ -157,7 +157,7 @@ const register = async (e: any) => {
               <input
                 type="text"
                 name="address"
-                @input="verifCompany(company)"
+                @input="verifyCompany(company)"
                 v-model="company.address"
                 placeholder="Entrez l'adresse de la société"
                 required="required"
@@ -173,7 +173,7 @@ const register = async (e: any) => {
               <input
                 type="text"
                 name="city"
-                @input="verifCompany(company)"
+                @input="verifyCompany(company)"
                 v-model="company.city"
                 placeholder="Entrez la ville de la société"
                 required="required"
@@ -189,7 +189,7 @@ const register = async (e: any) => {
               <input
                 type="text"
                 name="country"
-                @input="verifCompany(company)"
+                @input="verifyCompany(company)"
                 v-model="company.country"
                 placeholder="Entrez le pays de la société"
                 required="required"
@@ -205,7 +205,7 @@ const register = async (e: any) => {
               <input
                 type="text"
                 name="siret"
-                @input="verifCompany(company)"
+                @input="verifyCompany(company)"
                 v-model="company.siret"
                 placeholder="Entrez le numéro de siret"
                 required="required"

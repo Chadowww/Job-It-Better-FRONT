@@ -46,7 +46,7 @@ onUnmounted(() => {
 
 <template>
   <section
-    class="relative w-full h-[34vh] lg:h-[54vh] mx-auto mt-16 md:mt-32 mb-24 md:rounded-3xl shadow-custom"
+    class="relative w-full h-[34vh] lg:h-[54vh] mx-auto mt-16 md:mt-24 mb-24 md:rounded-3xl shadow-custom"
   >
     <img
       :src="image"

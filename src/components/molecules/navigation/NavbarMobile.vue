@@ -13,7 +13,7 @@ const modalVisibility = useModalVisibility(store);
 
 <template>
   <div
-    class="md:hidden fixed z-[90] w-full p-4 bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
+    class="md:hidden fixed z-[90] min-h-16 w-full p-4 bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
   >
     <span
       class="absolute z-[90] top-5 left-5 transform scale-[150%]"
@@ -34,7 +34,7 @@ const modalVisibility = useModalVisibility(store);
         />
       </svg>
     </span>
-    <a href="/public">
+    <a href="/">
       <img :src="logo" alt="Logo JobItBetter" class="w-8/12 m-auto" />
     </a>
     <transition name="left-nav">

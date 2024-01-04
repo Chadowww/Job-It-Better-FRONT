@@ -6,6 +6,7 @@ import CompanyButtonLogin from "@/components/atoms/company/CompanyButtonLogin.vu
 import CompanyButtonRegister from "@/components/atoms/company/CompanyButtonRegister.vue";
 import LogoutButton from "@/components/molecules/LogoutButton.vue";
 import SearchBar from "@/components/atoms/SearchBar.vue";
+import ProfileButton from "@/components/atoms/navigation/button/ProfileButton.vue";
 import { useStore } from "vuex";
 import { computed, onMounted, ref } from "vue";
 import { Dropdown, initTE, Ripple } from "tw-elements";
@@ -32,10 +33,10 @@ const setShouldHide = () => {
 
 <template>
   <div
-    class="hidden fixed z-[100] md:flex justify-between items-center w-full px-4 bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
+    class="hidden fixed z-[100] md:flex justify-between items-center h-24 w-full px-4 bg-[#f5f5f5] shadow-[0_0px_3px_0_rgba(0,0,0,0.07),0_2px_2px_0_rgba(0,0,0,0.04)]"
   >
     <div class="w-2/12 my-4" v-if="!shouldHide">
-      <a href="/public">
+      <a href="/">
         <img :src="logo" alt="Logo JobItBetter" />
       </a>
     </div>
@@ -152,15 +153,7 @@ const setShouldHide = () => {
       <a href="" v-if="isLoggedIn">
         <LogoutButton />
       </a>
-      <a href="" v-if="isLoggedIn">
-        <button
-          type="button"
-          class="inline-block rounded-full border-2 border-[#14532D] px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-[#14532D] transition duration-150 ease-in-out hover:border-success-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-success-600 focus:border-success-600 focus:text-success-600 focus:outline-none focus:ring-0 active:border-success-700 active:text-success-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-          data-te-ripple-init
-        >
-          Mon profile
-        </button>
-      </a>
+      <ProfileButton v-if="isLoggedIn" />
     </div>
   </div>
 </template>

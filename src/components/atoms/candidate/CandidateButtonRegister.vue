@@ -18,7 +18,7 @@ const modalVisibility = useModalVisibility(store);
   </button>
   <transition name="register-modal">
     <CandidateModalRegister
-      v-if="modalVisibility.isCandidateRegistrationModalVisible"
+      v-if="modalVisibility.isCandidateRegistrationModalVisible.value"
     />
   </transition>
 </template>
