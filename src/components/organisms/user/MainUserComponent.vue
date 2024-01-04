@@ -4,9 +4,16 @@ import { getUser, user } from "@/services/API/user/UserService";
 import moment from "moment";
 import LinkedinButton from "@/components/atoms/logo/LinkedinButton.vue";
 import avatar from "@/assets/images/avatar.png";
+import GithubButton from "@/components/atoms/logo/GithubButton.vue";
+import FacebookButton from "@/components/atoms/logo/FacebookButton.vue";
+import TwitterButton from "@/components/atoms/logo/TwitterButton.vue";
+import WebsiteButton from "@/components/atoms/logo/WebsiteButton.vue";
+
 moment.locale("fr");
+
 onMounted(async () => {
   await getUser();
+  console.log(user.value);
 });
 </script>
 
@@ -166,7 +173,7 @@ onMounted(async () => {
           <div>
             <h3 class="text-left text-xl sm:text-2xl font-bold mt-6">
               Bonjour <span class="text-green-900">{{ user.firstname }}</span>
-              :)
+              :]
             </h3>
             <small
               >dernière mise à jour :
@@ -184,13 +191,17 @@ onMounted(async () => {
         </div>
         <div class="w-full sm:w-4/12">
           <div>
-            <img :src="avatar" alt="Photo de profile" />
+            <img
+              :src="user.avatar != null ? user.avatar : avatar"
+              alt="Photo de profile"
+            />
           </div>
-          <div class="flex sm:grid grid-cols-2 gap-2 justify-center">
-            <LinkedinButton :link="user.linkedin" />
-            <LinkedinButton :link="user.facebook" />
-            <LinkedinButton :link="user.twitter" />
-            <LinkedinButton :link="user.github" />
+          <div class="flex sm:grid grid-cols-3 gap-2 justify-center">
+            <LinkedinButton v-if="user.linkedin" :link="user.linkedin" />
+            <GithubButton v-if="user.github" :link="user.github" />
+            <FacebookButton v-if="user.facebook" :link="user.facebook" />
+            <TwitterButton v-if="user.twitter" :link="user.twitter" />
+            <WebsiteButton v-if="user.website" :link="user.website" />
           </div>
         </div>
       </div>
