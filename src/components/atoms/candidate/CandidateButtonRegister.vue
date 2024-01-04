@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CandidateModalRegister from "@/components/molecules/candidate/CandidateModalRegister.vue";
 import { useModalVisibility } from "@/utils/modalVisibility";
 import { useStore } from "vuex";
 
@@ -16,21 +15,6 @@ const modalVisibility = useModalVisibility(store);
   >
     Inscription
   </button>
-  <transition name="register-modal">
-    <CandidateModalRegister
-      v-if="modalVisibility.isCandidateRegistrationModalVisible.value"
-    />
-  </transition>
 </template>
 
-<style scoped lang="scss">
-.register-modal-enter-active,
-.register-modal-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.register-modal-enter-from,
-.register-modal-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped lang="scss"></style>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CompanyModalRegister from "@/components/molecules/company/CompanyModalRegister.vue";
 import { useModalVisibility } from "@/utils/modalVisibility";
 import { useStore } from "vuex";
 
@@ -17,21 +16,6 @@ const modalVisibility = useModalVisibility(store);
       >Inscription</a
     >
   </li>
-  <transition name="register-modal">
-    <CompanyModalRegister
-      v-if="modalVisibility.isCompanyRegistrationModalVisible.value"
-    />
-  </transition>
 </template>
 
-<style scoped lang="scss">
-.register-modal-enter-active,
-.register-modal-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.register-modal-enter-from,
-.register-modal-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped lang="scss"></style>
