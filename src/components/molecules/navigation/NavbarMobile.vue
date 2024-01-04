@@ -34,7 +34,7 @@ const modalVisibility = useModalVisibility(store);
         />
       </svg>
     </span>
-    <a href="/public">
+    <a href="/">
       <img :src="logo" alt="Logo JobItBetter" class="w-8/12 m-auto" />
     </a>
     <transition name="left-nav">
