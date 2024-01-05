@@ -7,6 +7,7 @@ export default createStore({
     isCompanyLoginModalVisible: false,
     isCandidateRegistrationModalVisible: false,
     isCandidateLoginModalVisible: false,
+    isCardUpdateUserVisible: false,
   },
   getters: {},
   mutations: {
@@ -27,6 +28,9 @@ export default createStore({
     toggleCandidateLoginModalVisibility(state) {
       state.isCandidateLoginModalVisible = !state.isCandidateLoginModalVisible;
     },
+    toggleCardUpdateUserVisibility(state) {
+      state.isCardUpdateUserVisible = !state.isCardUpdateUserVisible;
+    },
   },
   actions: {
     toggleCompanyRegistrationModalVisibility({ commit }) {
@@ -40,6 +44,9 @@ export default createStore({
     },
     toggleCandidateLoginModalVisibility({ commit }) {
       commit("toggleCandidateLoginModalVisibility");
+    },
+    toggleCardUpdateUserVisibility({ commit }) {
+      commit("toggleCardUpdateUserVisibility");
     },
   },
   modules: {},
