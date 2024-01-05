@@ -18,7 +18,7 @@ const modalVisibility = useModalVisibility(store);
   </nav>
   <transition name="fade">
     <CandidateModalLogin
-      v-show="modalVisibility.isCandidateLoginModalVisible.value"
+      v-if="modalVisibility.isCandidateLoginModalVisible.value"
     />
   </transition>
   <transition name="fade">
