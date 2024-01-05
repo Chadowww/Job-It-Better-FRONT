@@ -102,16 +102,6 @@ const modalVisibility = useModalVisibility(store);
       </div>
     </transition>
   </div>
-  <CompanyModalRegister
-    v-if="modalVisibility.isCompanyRegistrationModalVisible.value"
-  />
-  <CompanyModalLogin v-if="modalVisibility.isCompanyLoginModalVisible.value" />
-  <CandidateModalRegister
-    v-if="modalVisibility.isCandidateRegistrationModalVisible.value"
-  />
-  <CandidateModalLogin
-    v-if="modalVisibility.isCandidateLoginModalVisible.value"
-  />
 </template>
 
 <style scoped lang="scss">

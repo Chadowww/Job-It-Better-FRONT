@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { computed, onMounted } from "vue";
+import { useStore } from "vuex";
 import { getUser, user } from "@/services/API/user/UserService";
 import moment from "moment";
 import LinkedinButton from "@/components/atoms/logo/LinkedinButton.vue";
@@ -8,18 +9,25 @@ import GithubButton from "@/components/atoms/logo/GithubButton.vue";
 import FacebookButton from "@/components/atoms/logo/FacebookButton.vue";
 import TwitterButton from "@/components/atoms/logo/TwitterButton.vue";
 import WebsiteButton from "@/components/atoms/logo/WebsiteButton.vue";
+import UserProfileUpdateForm from "@/components/organisms/user/UserProfileUpdateForm.vue";
+
+const store = useStore();
+const isCardUpdateUserVisible = computed(
+  () => store.state.isCardUpdateUserVisible
+);
+const toggleCardUpdateUserVisibility = () => {
+  store.dispatch("toggleCardUpdateUserVisibility");
+};
 
 moment.locale("fr");
-
 onMounted(async () => {
   await getUser();
-  console.log(user.value);
 });
 </script>
 
 <template>
   <section
-    class="bg-[#f5f5f5] w-full flex flex-col-reverse sm:flex-row justify-around items-center sm:items-start py-5 sm:px-5 sm:rounded-2xl shadow-custom"
+    class="bg-[#f5f5f5] w-full flex flex-wrap flex-col-reverse sm:flex-row justify-around items-center sm:items-start py-5 sm:px-5 md:my-16 sm:rounded-2xl shadow-custom"
   >
     <div
       class="w-11/12 sm:w-7/12 flex flex-col sm:grid grid-cols-2 gap-8 mt-8 sm:mt-0"
@@ -109,6 +117,7 @@ onMounted(async () => {
         </p>
       </div>
       <div
+        @click="toggleCardUpdateUserVisibility"
         class="bg-[#DBC59B] p-5 flex flex-col 2xl:h-40 rounded-2xl shadow-custom hover:scale-105 ease-in-out duration-500 hover:cursor-pointer"
       >
         <h2
@@ -206,7 +215,23 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+    <transition name="height" class="overflow-hidden">
+      <UserProfileUpdateForm v-if="isCardUpdateUserVisible" :user="user" />
+    </transition>
   </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.height-enter-active,
+.height-leave-active {
+  transition: height 1.5s ease, opacity 1s ease;
+}
+.height-enter-from {
+  height: 0;
+  opacity: 0;
+}
+.height-leave-to {
+  height: 0;
+  opacity: 0;
+}
+</style>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CandidateModalLogin from "@/components/molecules/candidate/CandidateModalLogin.vue";
 import { useModalVisibility } from "@/utils/modalVisibility";
 import { useStore } from "vuex";
 
@@ -16,21 +15,6 @@ const modalVisibility = useModalVisibility(store);
   >
     Connexion
   </button>
-  <transition name="login-modal">
-    <CandidateModalLogin
-      v-if="modalVisibility.isCandidateLoginModalVisible.value"
-    />
-  </transition>
 </template>
 
-<style scoped lang="scss">
-.login-modal-enter-active,
-.login-modal-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.login-modal-enter-from,
-.login-modal-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped lang="scss"></style>

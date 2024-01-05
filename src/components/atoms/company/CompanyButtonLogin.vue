@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CompanyModalLogin from "@/components/molecules/company/CompanyModalLogin.vue";
 import { useModalVisibility } from "@/utils/modalVisibility";
 import { useStore } from "vuex";
 
@@ -17,21 +16,6 @@ const modalVisibility = useModalVisibility(store);
       >connexion</a
     >
   </li>
-  <transition name="login-modal">
-    <CompanyModalLogin
-      v-if="modalVisibility.isCompanyLoginModalVisible.value"
-    />
-  </transition>
 </template>
 
-<style scoped lang="scss">
-.login-modal-enter-active,
-.login-modal-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.login-modal-enter-from,
-.login-modal-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped lang="scss"></style>
