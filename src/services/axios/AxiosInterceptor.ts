@@ -26,6 +26,8 @@ axios.interceptors.response.use(
       console.log("Pas de token !");
       localStorage.removeItem("token");
       window.location.href = "/";
+    } else {
+      console.log(error.response.data);
     }
     return Promise.reject(error);
   }
