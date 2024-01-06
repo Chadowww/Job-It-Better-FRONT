@@ -3,7 +3,6 @@ import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { getUser, user } from "@/services/API/user/UserService";
 import { uploadAvatar } from "@/services/file/FileManager";
-import { z } from "zod";
 import moment from "moment";
 import LinkedinButton from "@/components/atoms/logo/LinkedinButton.vue";
 import avatar from "@/assets/images/avatar.png";
