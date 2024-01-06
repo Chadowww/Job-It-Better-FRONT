@@ -64,7 +64,7 @@ async function update() {
       <input type="text" v-model="user.twitter" />
     </div>
     <div class="flex flex-col">
-      <label for="">LinkedIN</label>
+      <label for="">LinkedIn</label>
       <input type="text" v-model="user.linkedin" />
     </div>
     <div class="flex flex-col">
