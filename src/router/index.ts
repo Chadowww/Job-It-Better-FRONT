@@ -43,14 +43,12 @@ router.beforeEach(async (to, from, next) => {
       let decoded: JwtTokenType;
       try {
         decoded = decodeToken(token.value);
-        console.log(decoded);
       } catch (e) {
         console.error(e);
         localStorage.removeItem("jwt");
         next("/");
         return;
       }
-      console.log(requiredRoles[1], decoded.roles[1]);
       if (requiredRoles[1] != decoded.roles[1]) {
         next("/");
       } else {
