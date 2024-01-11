@@ -10,14 +10,19 @@ import GithubButton from "@/components/atoms/logo/GithubButton.vue";
 import FacebookButton from "@/components/atoms/logo/FacebookButton.vue";
 import TwitterButton from "@/components/atoms/logo/TwitterButton.vue";
 import WebsiteButton from "@/components/atoms/logo/WebsiteButton.vue";
-import UserProfileUpdateForm from "@/components/organisms/user/UserProfileUpdateForm.vue";
+import UserProfileUpdateForm from "@/components/molecules/candidate/UserProfileUpdateForm.vue";
+import UserProfileResumeCard from "@/components/molecules/candidate/UserProfileResumeCard.vue";
 
 const store = useStore();
 const isCardUpdateUserVisible = computed(
   () => store.state.isCardUpdateUserVisible
 );
+const isCardResumeVisible = computed(() => store.state.isCardResumeVisible);
 const toggleCardUpdateUserVisibility = () => {
   store.dispatch("toggleCardUpdateUserVisibility");
+};
+const toggleCardResumeVisibility = () => {
+  store.dispatch("toggleCardResumeVisibility");
 };
 
 const file = ref(null);
@@ -163,6 +168,7 @@ onMounted(async () => {
         </p>
       </div>
       <div
+        @click="toggleCardResumeVisibility"
         class="bg-[#CED3E7] p-5 flex flex-col 2xl:h-40 rounded-2xl shadow-custom hover:scale-105 ease-in-out duration-500 hover:cursor-pointer"
       >
         <h2
@@ -262,6 +268,9 @@ onMounted(async () => {
     </div>
     <transition name="height" class="overflow-hidden">
       <UserProfileUpdateForm v-if="isCardUpdateUserVisible" :user="user" />
+    </transition>
+    <transition name="height" class="overflow-hidden">
+      <UserProfileResumeCard v-if="isCardResumeVisible" :user="user" />
     </transition>
   </section>
 </template>
