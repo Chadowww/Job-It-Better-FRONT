@@ -14,7 +14,7 @@ export interface UserType {
   avatar: string;
   slug: string;
   coverLetter: any;
-  user_id: number;
+  userId: number;
   socialeMedia_id: number;
   linkedin: string;
   github: string;
