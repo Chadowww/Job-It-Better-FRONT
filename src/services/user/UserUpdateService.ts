@@ -5,7 +5,7 @@ import { updateCandidate } from "@/services/candidate/CandidateUpdateService";
 export const updateUser = async (user: UserType): Promise<boolean> => {
   try {
     const response = await axios.put(
-      `https://127.0.0.1:8000/user/update/${user.user_id}`,
+      `https://127.0.0.1:8000/user/update/${user.userId}`,
       user,
       {
         headers: {
