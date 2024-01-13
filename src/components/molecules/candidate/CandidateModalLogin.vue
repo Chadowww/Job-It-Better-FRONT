@@ -145,7 +145,7 @@ const login = async () => {
             @click="login"
             class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
           >
-            Se connectecter
+            Se connecter
           </button>
         </div>
         <div class="w-full flex justify-end">
