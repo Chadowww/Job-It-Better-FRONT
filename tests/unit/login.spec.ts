@@ -39,4 +39,18 @@ describe("CandidateModalLogin", () => {
 
     expect(wrapper.find(".error").text()).toBe("L'email n'est pas valide.");
   });
+  it("should show error password", async () => {
+    const wrapper = mount(CandidateModalLogin, {
+      global: {
+        plugins: [store],
+      },
+    });
+
+    const passwordField = wrapper.find("input[type='password']");
+    await passwordField.setValue("fw7jzpdr7!");
+
+    expect(wrapper.find(".error").text()).toBe(
+      "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial"
+    );
+  });
 });

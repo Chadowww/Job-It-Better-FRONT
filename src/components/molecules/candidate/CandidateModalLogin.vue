@@ -125,7 +125,7 @@ const login = async () => {
             />
             <div
               v-if="errors.password != '' && errors.password != null"
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.password }}</p>
             </div>
