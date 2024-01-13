@@ -26,4 +26,17 @@ describe("CandidateModalLogin", () => {
     await wrapper.find("button").trigger("click");
     expect(userLogin).toHaveBeenCalled();
   });
+
+  it("should show error email", async () => {
+    const wrapper = mount(CandidateModalLogin, {
+      global: {
+        plugins: [store],
+      },
+    });
+
+    const emailField = wrapper.find("input[type='email']");
+    await emailField.setValue("test");
+
+    expect(wrapper.find(".error").text()).toBe("L'email n'est pas valide.");
+  });
 });
