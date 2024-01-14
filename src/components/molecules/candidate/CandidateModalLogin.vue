@@ -103,7 +103,7 @@ const login = async () => {
             />
             <div
               v-if="errors.email != '' && errors.email != null"
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.email }}</p>
             </div>
@@ -125,7 +125,7 @@ const login = async () => {
             />
             <div
               v-if="errors.password != '' && errors.password != null"
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.password }}</p>
             </div>
@@ -145,7 +145,7 @@ const login = async () => {
             @click="login"
             class="bg-green-900 text-white rounded-3xl p-2 hover:bg-green-950 hover:scale-110 transition ease-in-out"
           >
-            Se connectecter
+            Se connecter
           </button>
         </div>
         <div class="w-full flex justify-end">
