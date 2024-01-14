@@ -124,10 +124,10 @@ const register = async (e: any) => {
             </div>
           </div>
           <div class="flex flex-col">
-            <label for="password">Mot de passe</label>
+            <label for="password-verif">Mot de passe</label>
             <input
               type="password"
-              name="password"
+              name="password-verif"
               @input="verifyPassword(candidateUser.password)"
               v-model="candidateUser.password"
               placeholder="Entre ton mot de passe"
