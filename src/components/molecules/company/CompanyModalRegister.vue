@@ -60,7 +60,7 @@ const register = async (e: any) => {
             />
             <div
               v-if="errors.email != '' && errors.email != null"
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.email }}</p>
             </div>
@@ -82,7 +82,7 @@ const register = async (e: any) => {
             />
             <div
               v-if="errors.password != '' && errors.password != null"
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.password }}</p>
             </div>
@@ -111,7 +111,7 @@ const register = async (e: any) => {
               v-if="
                 errors.repeatPassword != '' && errors.repeatPassword != null
               "
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.repeatPassword }}</p>
             </div>
