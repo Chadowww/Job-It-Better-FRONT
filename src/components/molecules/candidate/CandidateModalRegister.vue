@@ -118,13 +118,13 @@ const register = async (e: any) => {
             />
             <div
               v-if="errors.email != '' && errors.email != null"
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.email }}</p>
             </div>
           </div>
           <div class="flex flex-col">
-            <label for="password">Mot de passe</label>
+            <label for="password-verif">Mot de passe</label>
             <input
               type="password"
               name="password"
@@ -140,7 +140,7 @@ const register = async (e: any) => {
             />
             <div
               v-if="errors.password != '' && errors.password != null"
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.password }}</p>
             </div>
@@ -149,7 +149,7 @@ const register = async (e: any) => {
             <label for="password">Mot de passe</label>
             <input
               type="password"
-              name="password"
+              name="password-verif"
               @input="
                 verifyRepeatPassword(
                   candidateUser.password,
@@ -169,7 +169,7 @@ const register = async (e: any) => {
               v-if="
                 errors.repeatPassword != '' && errors.repeatPassword != null
               "
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.repeatPassword }}</p>
             </div>
@@ -208,7 +208,7 @@ const register = async (e: any) => {
           </div>
           <div
             v-if="errors.candidate != '' && errors.candidate != null"
-            class="border-2 border-red-600 p-2 text-red-600 rounded-md col-span-2"
+            class="error border-2 border-red-600 p-2 text-red-600 rounded-md col-span-2"
           >
             <p>{{ errors.candidate }}</p>
           </div>
