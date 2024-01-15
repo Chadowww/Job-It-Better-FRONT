@@ -127,7 +127,7 @@ const register = async (e: any) => {
             <label for="password-verif">Mot de passe</label>
             <input
               type="password"
-              name="password-verif"
+              name="password"
               @input="verifyPassword(candidateUser.password)"
               v-model="candidateUser.password"
               placeholder="Entre ton mot de passe"
@@ -149,7 +149,7 @@ const register = async (e: any) => {
             <label for="password">Mot de passe</label>
             <input
               type="password"
-              name="password"
+              name="password-verif"
               @input="
                 verifyRepeatPassword(
                   candidateUser.password,
@@ -169,7 +169,7 @@ const register = async (e: any) => {
               v-if="
                 errors.repeatPassword != '' && errors.repeatPassword != null
               "
-              class="border-2 border-red-600 p-2 text-red-600 rounded-md"
+              class="error border-2 border-red-600 p-2 text-red-600 rounded-md"
             >
               <p>{{ errors.repeatPassword }}</p>
             </div>
