@@ -41,13 +41,13 @@ describe("CandidateModalRegister", () => {
     });
 
     const emailInput = wrapper.find('input[name="email"]');
-    await emailInput.setValue("test@example.com");
+    await emailInput.setValue("a.test@example.com");
 
-    const passwordVerifInput = wrapper.find('input[name="password-verif"]');
-    await passwordVerifInput.setValue("Fw7jzpdr7!");
+    const passwordField = wrapper.find("input[name='password']");
+    await passwordField.setValue("Fw7jzpdr7!");
 
-    const passwordInput = wrapper.find('input[name="password"]');
-    await passwordInput.setValue("Fw7jzpdr7!");
+    const passwordVerifField = wrapper.find("input[name='password-verif']");
+    await passwordVerifField.setValue("Fw7jzpdr7!");
 
     const firstNameInput = wrapper.find('input[name="firstname"]');
     await firstNameInput.setValue("John");
@@ -108,6 +108,57 @@ describe("CandidateModalRegister", () => {
 
     expect(wrapper.find(".error").text()).toBe(
       "Les mots de passe ne sont pas identiques."
+    );
+  });
+
+  it("should show error firstname", async () => {
+    const wrapper = mount(CandidateModalRegister, {
+      global: {
+        plugins: [store],
+      },
+    });
+
+    const emailInput = wrapper.find('input[name="email"]');
+    await emailInput.setValue("a.test@example.com");
+
+    const passwordField = wrapper.find("input[name='password']");
+    await passwordField.setValue("Fw7jzpdr7!");
+
+    const passwordVerifField = wrapper.find("input[name='password-verif']");
+    await passwordVerifField.setValue("Fw7jzpdr7!");
+
+    const firstNameInput = wrapper.find('input[name="firstname"]');
+    await firstNameInput.setValue("J");
+
+    expect(wrapper.find(".error").text()).toBe(
+      "Les informations du candidat ne sont pas valide. Veuillez vérifier les champs Prénom et Nom."
+    );
+  });
+
+  it("should show error lastname", async () => {
+    const wrapper = mount(CandidateModalRegister, {
+      global: {
+        plugins: [store],
+      },
+    });
+
+    const emailInput = wrapper.find('input[name="email"]');
+    await emailInput.setValue("a.test@example.com");
+
+    const passwordField = wrapper.find("input[name='password']");
+    await passwordField.setValue("Fw7jzpdr7!");
+
+    const passwordVerifField = wrapper.find("input[name='password-verif']");
+    await passwordVerifField.setValue("Fw7jzpdr7!");
+
+    const firstNameInput = wrapper.find('input[name="firstname"]');
+    await firstNameInput.setValue("John");
+
+    const lastNameInput = wrapper.find('input[name="lastname"]');
+    await lastNameInput.setValue("D");
+
+    expect(wrapper.find(".error").text()).toBe(
+      "Les informations du candidat ne sont pas valide. Veuillez vérifier les champs Prénom et Nom."
     );
   });
 });

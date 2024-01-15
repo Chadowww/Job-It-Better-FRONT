@@ -208,7 +208,7 @@ const register = async (e: any) => {
           </div>
           <div
             v-if="errors.candidate != '' && errors.candidate != null"
-            class="border-2 border-red-600 p-2 text-red-600 rounded-md col-span-2"
+            class="error border-2 border-red-600 p-2 text-red-600 rounded-md col-span-2"
           >
             <p>{{ errors.candidate }}</p>
           </div>
