@@ -91,7 +91,7 @@ const register = async (e: any) => {
             <label for="password">Mot de passe</label>
             <input
               type="password"
-              name="password"
+              name="password-verif"
               @input="
                 verifyRepeatPassword(
                   companyUser.password,

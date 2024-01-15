@@ -1,7 +1,9 @@
 import CandidateModalRegister from "@/components/molecules/candidate/CandidateModalRegister.vue";
+import CompanyModalLogin from "@/components/molecules/company/CompanyModalLogin.vue";
 import { userRegister } from "@/services/user/UserRegistrationService";
 import { mount } from "@vue/test-utils";
 import store from "@/store";
+import CompanyModalRegister from "@/components/molecules/company/CompanyModalRegister.vue";
 jest.mock("@/services/user/UserRegistrationService", () => ({
   userRegister: jest.fn(),
 }));
@@ -161,4 +163,18 @@ describe("CandidateModalRegister", () => {
       "Les informations du candidat ne sont pas valide. Veuillez vérifier les champs Prénom et Nom."
     );
   });
+});
+
+describe("CompanyModalRegister", () => {
+  it("should render", () => {
+    const wrapper = mount(CandidateModalRegister, {
+      global: {
+        plugins: [store],
+      },
+    });
+    expect(wrapper.exists()).toBe(true);
+    expect(wrapper.text()).toContain("S'inscrire");
+    expect(wrapper.find("button").text()).toBe("S'inscrire");
+  });
+
 });
