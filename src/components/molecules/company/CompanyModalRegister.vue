@@ -222,7 +222,7 @@ const register = async (e: any) => {
           />
           <div
             v-if="errors.company != '' && errors.company != null"
-            class="border-2 border-red-600 p-2 text-red-600 rounded-md col-span-2"
+            class="error border-2 border-red-600 p-2 text-red-600 rounded-md col-span-2"
           >
             <p>{{ errors.company }}</p>
           </div>

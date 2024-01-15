@@ -266,4 +266,28 @@ describe("CompanyModalRegister", () => {
       "Les mots de passe ne sont pas identiques."
     );
   });
+
+  it("should show error company name", async () => {
+    const wrapper = mount(CompanyModalRegister, {
+      global: {
+        plugins: [store],
+      },
+    });
+
+    const emailInput = wrapper.find('input[name="email"]');
+    await emailInput.setValue("a.sale@outlook.fr");
+
+    const passwordField = wrapper.find("input[name='password']");
+    await passwordField.setValue("Fw7jzpdr7!");
+
+    const passwordVerifField = wrapper.find("input[name='password-verif']");
+    await passwordVerifField.setValue("Fw7jzpdr7!");
+
+    const companyNameInput = wrapper.find('input[name="name"]');
+    await companyNameInput.setValue("C");
+
+    expect(wrapper.find(".error").text()).toBe(
+      "Les informations de la société n'est pas valide. Veuillez vérifier les champs Nom, Téléphone, Adresse, Ville, Pays et Siret."
+    );
+  });
 });
