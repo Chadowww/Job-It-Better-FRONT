@@ -245,4 +245,25 @@ describe("CompanyModalRegister", () => {
       "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial"
     );
   });
+
+  it("should show error password verif", async () => {
+    const wrapper = mount(CompanyModalRegister, {
+      global: {
+        plugins: [store],
+      },
+    });
+
+    const emailField = wrapper.find("input[type='email']");
+    await emailField.setValue("a.sale@outlook.fr");
+
+    const passwordField = wrapper.find("input[name='password']");
+    await passwordField.setValue("Fw7jzpdr7!");
+
+    const passwordVerifField = wrapper.find("input[name='password-verif']");
+    await passwordVerifField.setValue("fw7jzpdr7!");
+
+    expect(wrapper.find(".error").text()).toBe(
+      "Les mots de passe ne sont pas identiques."
+    );
+  });
 });
