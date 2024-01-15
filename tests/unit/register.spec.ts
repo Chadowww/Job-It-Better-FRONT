@@ -177,4 +177,42 @@ describe("CompanyModalRegister", () => {
     expect(wrapper.find("button").text()).toBe("S'inscrire");
   });
 
+  it("should run register function", async () => {
+    const wrapper = mount(CompanyModalRegister, {
+      global: {
+        plugins: [store],
+      },
+    });
+
+    const emailInput = wrapper.find('input[name="email"]');
+    await emailInput.setValue("a.sale@outlook.fr");
+
+    const passwordField = wrapper.find("input[name='password']");
+    await passwordField.setValue("Fw7jzpdr7!");
+
+    const passwordVerifField = wrapper.find("input[name='password-verif']");
+    await passwordVerifField.setValue("Fw7jzpdr7!");
+
+    const companyNameInput = wrapper.find('input[name="name"]');
+    await companyNameInput.setValue("Company");
+
+    const companyPhoneInput = wrapper.find('input[name="phone"]');
+    await companyPhoneInput.setValue("0123456789");
+
+    const companyAddressInput = wrapper.find('input[name="address"]');
+    await companyAddressInput.setValue("1 rue de la Paix");
+
+    const companyCityInput = wrapper.find('input[name="city"]');
+    await companyCityInput.setValue("Paris");
+
+    const companyCountryInput = wrapper.find('input[name="country"]');
+    await companyCountryInput.setValue("France");
+
+    const companySiretInput = wrapper.find('input[name="siret"]');
+    await companySiretInput.setValue("01234567890123");
+    await wrapper.vm.$nextTick();
+
+    await wrapper.find("button").trigger("click");
+    expect(userRegister).toHaveBeenCalled();
+  });
 });
