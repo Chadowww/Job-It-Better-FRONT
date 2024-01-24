@@ -5,7 +5,7 @@ import { updateCandidate } from "@/services/candidate/CandidateUpdateService";
 export const updateUser = async (user: UserType): Promise<boolean> => {
   try {
     const response = await axios.put(
-      `https://127.0.0.1:8000/user/update/${user.userId}`,
+      `https://127.0.0.1:8000/user/update/${user.user_id}`,
       user,
       {
         headers: {
@@ -14,6 +14,7 @@ export const updateUser = async (user: UserType): Promise<boolean> => {
       }
     );
     if (response.status === 200 && user.roles === 3) {
+      console.log(user);
       return await updateCandidate(user);
     }
     return false;

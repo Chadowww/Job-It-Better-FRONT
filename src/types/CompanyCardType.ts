@@ -1,5 +1,5 @@
 export interface CompanyCardType {
-  id: number;
+  company_id: number;
   name: string;
   slug: string;
   cover: string;

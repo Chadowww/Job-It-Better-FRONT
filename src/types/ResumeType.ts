@@ -1,7 +1,7 @@
 export interface ResumeType {
-  id: number | null;
+  resume_id: number | null;
   title: string | null;
   filename: string | null;
-  candidateId: number | null;
+  candidate_id: number | null;
   file: File | null;
 }
