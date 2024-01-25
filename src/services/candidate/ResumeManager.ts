@@ -19,7 +19,6 @@ export const getResumes = async (
     resumes.value = response.data;
     return resumes.value;
   } catch (error: any) {
-    console.log(error);
     return false;
   }
 };
