@@ -30,7 +30,7 @@ const register = async (e: any) => {
 <template>
   <div
     @click="modalVisibility.toggleCompanyRegistrationModalVisibility()"
-    class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
+    class="fixed z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
   >
     <div
       @click.stop
