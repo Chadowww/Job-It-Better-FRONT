@@ -40,7 +40,6 @@ async function upload() {
 
 onMounted(async () => {
   await getResumes(props.user?.candidate_id);
-  console.log(resumes.value);
 });
 </script>
 
