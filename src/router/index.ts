@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import UserView from "../views/UserView.vue";
+import JobOfferView from "../views/JobOfferView.vue";
 import { token, decodeToken } from "@/utils/tokenManager";
 import { JwtTokenType } from "@/types/JwtTokenType";
 
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "CompanyProfile",
     component: UserView,
     meta: { requiresAuth: true, requiredRoles: ["ROLE_USER", "ROLE_COMPANY"] },
+  },
+  {
+    path: "/offre/:id",
+    name: "OfferDetails",
+    component: JobOfferView,
   },
 ];
 
