@@ -14,7 +14,6 @@ export const updateUser = async (user: UserType): Promise<boolean> => {
       }
     );
     if (response.status === 200 && user.roles === 3) {
-      console.log(user);
       return await updateCandidate(user);
     }
     return false;
