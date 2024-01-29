@@ -19,7 +19,7 @@ const modalVisibility = useModalVisibility(store);
 const register = async (e: any) => {
   e.preventDefault();
   const result = await userRegister(companyUser);
-  company.user_id = Number(result);
+  company.userId = Number(result);
   if (await companyRegister(company)) {
     modalVisibility.toggleCompanyRegistrationModalVisibility();
     modalVisibility.toggleCompanyLoginModalVisibility();
@@ -216,8 +216,8 @@ const register = async (e: any) => {
           </div>
           <input
             type="hidden"
-            name="user_id"
-            v-model="company.user_id"
+            name="userId"
+            v-model="company.userId"
             value=""
           />
           <div

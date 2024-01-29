@@ -18,7 +18,7 @@ const modalVisibility = useModalVisibility(store);
 const register = async (e: any) => {
   e.preventDefault();
   const result = await userRegister(candidateUser);
-  candidate.user_id = Number(result);
+  candidate.userId = Number(result);
   if (Number.isInteger(result)) {
     if (await candidateRegister(candidate)) {
       modalVisibility.toggleCandidateRegistrationModalVisibility();
@@ -215,8 +215,8 @@ const register = async (e: any) => {
           <div>
             <input
               type="hidden"
-              name="user_id"
-              v-model="candidate.user_id"
+              name="userId"
+              v-model="candidate.userId"
               value=""
             />
           </div>

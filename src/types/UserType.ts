@@ -1,10 +1,10 @@
 export interface UserType {
-  user_id: number;
+  userId: number;
   email: string;
   roles: number;
   created_at: string;
   updated_at: string;
-  candidate_id: number;
+  candidateId: number;
   firstname: string;
   lastname: string;
   phone: string;
@@ -14,7 +14,7 @@ export interface UserType {
   avatar: string;
   slug: string;
   coverLetter: any;
-  socialeMedia_id: number;
+  socialeMediaId: number;
   linkedin: string;
   github: string;
   twitter: any;

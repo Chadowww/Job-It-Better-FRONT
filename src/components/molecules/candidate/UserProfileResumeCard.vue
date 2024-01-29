@@ -18,28 +18,28 @@ const props = defineProps({
 const user: UserType = reactive(props.user);
 
 const resume: ResumeType = reactive({
-  resume_id: null,
+  resumeId: null,
   title: null,
   filename: null,
-  candidate_id: user.candidate_id,
+  candidateId: user.candidateId,
   file: null,
 });
 const onFileChange = (e: any) => {
   resume.file = e.target.files[0];
-  resume.candidate_id = user.candidate_id;
+  resume.candidateId = user.candidateId;
 };
 
 async function upload() {
   console.log(resume);
   const uploadSuccess = await uploadResume(resume);
   if (uploadSuccess) {
-    await getResumes(props.user?.candidate_id);
+    await getResumes(props.user?.candidateId);
   }
   window.location.reload();
 }
 
 onMounted(async () => {
-  await getResumes(props.user?.candidate_id);
+  await getResumes(props.user?.candidateId);
 });
 </script>
 

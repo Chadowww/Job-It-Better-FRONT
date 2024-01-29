@@ -5,5 +5,5 @@ export interface CompanyFormType {
   city: string | null;
   country: string | null;
   siret: string | null;
-  user_id: number | null;
+  userId: number | null;
 }
