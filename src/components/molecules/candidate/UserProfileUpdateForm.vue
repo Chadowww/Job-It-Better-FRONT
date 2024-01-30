@@ -25,21 +25,21 @@ async function update() {
 
 <template>
   <form
-    class="w-8/12 h-[590px] mx-auto my-5 p-6 grid grid-cols-4 gap-3 font-bold shadow-custom rounded-2xl"
+    class="w-11/12 lg:w-8/12 lg:h-[590px] mx-auto my-5 p-6 grid grid-cols-4 gap-3 font-bold shadow-custom rounded-2xl"
   >
-    <div class="col-span-2 flex flex-col">
+    <div class="col-span-4 lg:col-span-2 flex flex-col">
       <label for="">Nom :</label>
       <input type="text" v-model="user.lastname" />
     </div>
-    <div class="col-span-2 flex flex-col">
+    <div class="col-span-4 lg:col-span-2 flex flex-col">
       <label for="">Prénom :</label>
       <input type="text" v-model="user.firstname" />
     </div>
-    <div class="col-span-2 flex flex-col">
+    <div class="col-span-4 lg:col-span-2 flex flex-col">
       <label for="">Email :</label>
       <input type="text" v-model="user.email" />
     </div>
-    <div class="col-span-2 flex flex-col">
+    <div class="col-span-4 lg:col-span-2 flex flex-col">
       <label for="">Téléphone</label>
       <input type="text" v-model="user.phone" />
     </div>
@@ -47,31 +47,31 @@ async function update() {
       <label for="">Adresse :</label>
       <input type="text" v-model="user.address" />
     </div>
-    <div class="col-span-2 flex flex-col">
+    <div class="col-span-4 lg:col-span-2 flex flex-col">
       <label for="">Ville :</label>
       <input type="text" v-model="user.city" />
     </div>
-    <div class="col-span-2 flex flex-col">
+    <div class="col-span-4 lg:col-span-2 flex flex-col">
       <label for="">Pays :</label>
       <input type="text" v-model="user.country" />
     </div>
-    <div class="flex flex-col">
+    <div class="col-span-4 lg:col-span-1 flex flex-col">
       <label for="">Facebook :</label>
       <input type="text" v-model="user.facebook" />
     </div>
-    <div class="flex flex-col">
+    <div class="col-span-4 lg:col-span-1 flex flex-col">
       <label for="">Twitter</label>
       <input type="text" v-model="user.twitter" />
     </div>
-    <div class="flex flex-col">
+    <div class="col-span-4 lg:col-span-1 flex flex-col">
       <label for="">LinkedIn</label>
       <input type="text" v-model="user.linkedin" />
     </div>
-    <div class="flex flex-col">
+    <div class="col-span-4 lg:col-span-1 flex flex-col">
       <label for="">Github</label>
       <input type="text" v-model="user.github" />
     </div>
-    <div class="flex flex-col">
+    <div class="col-span-4 lg:col-span-1 flex flex-col">
       <label for="">Website</label>
       <input type="text" v-model="user.website" />
     </div>

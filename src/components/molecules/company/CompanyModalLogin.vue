@@ -19,7 +19,7 @@ const login = () => {
 <template>
   <div
     @click="modalVisibility.toggleCompanyLoginModalVisibility"
-    class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
+    class="fixed z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center"
   >
     <div
       @click.stop

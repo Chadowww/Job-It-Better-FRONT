@@ -7,5 +7,5 @@ export const company: CompanyFormType = {
   city: null,
   country: null,
   siret: null,
-  user_id: null,
+  userId: null,
 };

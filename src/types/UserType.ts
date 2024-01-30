@@ -1,5 +1,5 @@
 export interface UserType {
-  id: number;
+  userId: number;
   email: string;
   roles: number;
   created_at: string;
@@ -14,8 +14,7 @@ export interface UserType {
   avatar: string;
   slug: string;
   coverLetter: any;
-  userId: number;
-  socialeMedia_id: number;
+  socialeMediaId: number;
   linkedin: string;
   github: string;
   twitter: any;

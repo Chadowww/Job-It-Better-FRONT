@@ -14,8 +14,8 @@ export const userRegister = async (
         },
       }
     );
-    if (response.status === 201 && response.data.user_id) {
-      return response.data.user_id;
+    if (response.status === 201 && response.data.userId) {
+      return response.data.userId;
     }
   } catch (error: any) {
     console.log(error);

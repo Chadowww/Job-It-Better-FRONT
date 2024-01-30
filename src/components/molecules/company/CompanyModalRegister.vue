@@ -19,7 +19,7 @@ const modalVisibility = useModalVisibility(store);
 const register = async (e: any) => {
   e.preventDefault();
   const result = await userRegister(companyUser);
-  company.user_id = Number(result);
+  company.userId = Number(result);
   if (await companyRegister(company)) {
     modalVisibility.toggleCompanyRegistrationModalVisibility();
     modalVisibility.toggleCompanyLoginModalVisibility();
@@ -30,7 +30,7 @@ const register = async (e: any) => {
 <template>
   <div
     @click="modalVisibility.toggleCompanyRegistrationModalVisibility()"
-    class="absolute z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
+    class="fixed z-[150] top-0 left-0 h-screen w-screen bg-black bg-opacity-50 flex justify-center items-center p-2 md:p-8"
   >
     <div
       @click.stop
@@ -216,8 +216,8 @@ const register = async (e: any) => {
           </div>
           <input
             type="hidden"
-            name="user_id"
-            v-model="company.user_id"
+            name="userId"
+            v-model="company.userId"
             value=""
           />
           <div
